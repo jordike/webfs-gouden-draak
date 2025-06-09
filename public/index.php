@@ -17,4 +17,18 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+$host = strtolower($_SERVER['HTTP_HOST'] ?? 'unknown');
+
+$envMap = [
+    'development.gouden-draak.test' => '.env.development',
+    'testing.gouden-draak.test' => '.env.testing',
+    'acceptance.gouden-draak.test' => '.env.acceptance',
+    'production.gouden-draak.test' => '.env.production',
+];
+
+$envFile = $envMap[$host] ?? '.env';
+
+$app->useEnvironmentPath(__DIR__ . '/../');
+$app->loadEnvironmentFrom($envFile);
+
 $app->handleRequest(Request::capture());
