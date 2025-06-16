@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+    import { Link } from '@inertiajs/vue3';
+</script>
+
 <template>
     <div class="flex flex-row justify-between">
         <img class="h-[200px]" src="/assets/img/dragon-small.png" alt="Golden Dragon" />
@@ -9,9 +13,9 @@
             </h1>
 
             <nav class="flex flex-row justify-center gap-[3px]">
-                <a class="border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-3" href="#">Menukaart</a>
-                <a class="border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-3" href="#">Nieuws</a>
-                <a class="border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-3" href="#">Contact</a>
+                <Link class="border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-[10px]" href="/menukaart">Menukaart</Link>
+                <Link class="border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-[10px]" href="/nieuws">Nieuws</Link>
+                <Link class="border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-[10px]" href="/contact">Contact</Link>
             </nav>
         </section>
 

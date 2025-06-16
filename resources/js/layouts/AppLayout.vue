@@ -2,6 +2,7 @@
     import GoldenBorder from '@/components/border/GoldenBorder.vue';
     import Header from '@/components/Header.vue';
     import NavBar from '@/components/NavBar.vue';
+    import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -12,7 +13,11 @@
             <GoldenBorder>
                 <NavBar />
 
-                <slot />
+                <div class="mt-[50px]">
+                    <slot />
+                </div>
+
+                <Link class="mt-3 text-center" href="/contact"> Naar Contact </Link>
             </GoldenBorder>
         </div>
     </main>
