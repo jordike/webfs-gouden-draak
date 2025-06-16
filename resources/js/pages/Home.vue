@@ -3,7 +3,5 @@
 </script>
 
 <template>
-    <AppLayout>
-        <h1>Home page</h1>
-    </AppLayout>
+    <AppLayout></AppLayout>
 </template>

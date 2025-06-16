@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="nl">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,8 @@
         @inertiaHead
     </head>
 
-    <body class="bg-red-950">
+    <body class="bg-[#8b0000]">
         @inertia
     </body>
+
 </html>
