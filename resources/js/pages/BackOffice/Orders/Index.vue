@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import MenuCategoryList from '@/components/BackOffice/Orders/MenuCategoryList.vue';
+    import OrderList from '@/components/BackOffice/Orders/OrderList.vue';
     import BackOfficeLayout from '@/layouts/BackOfficeLayout.vue';
     import { computed, Ref, ref } from 'vue';
 
@@ -40,6 +42,32 @@
             })
             .filter((category) => category.items.length > 0);
     });
+
+    function addOrderItem(item: any) {
+        const existing = orderItems.value.find((o) => o.id === item.id);
+        if (existing) {
+            existing.amount = (existing.amount || 1) + 1;
+        } else {
+            orderItems.value.push({ ...item, amount: 1 });
+        }
+    }
+
+    function increaseOrderItem(idx: number) {
+        const item = orderItems.value[idx];
+        if (item) item.amount = (item.amount || 1) + 1;
+    }
+
+    function decreaseOrderItem(idx: number) {
+        const item = orderItems.value[idx];
+        if (item) {
+            item.amount = (item.amount || 1) - 1;
+            if (item.amount <= 0) orderItems.value.splice(idx, 1);
+        }
+    }
+
+    function removeOrderItem(idx: number) {
+        orderItems.value.splice(idx, 1);
+    }
 </script>
 
 <template>
@@ -101,56 +129,7 @@
                             </svg>
                             Geen resultaten gevonden.
                         </div>
-
-                        <div v-for="category in filteredCategories" :key="category.name" class="mb-10">
-                            <h2 class="mb-4 flex items-center gap-2 border-b-2 border-green-100 pb-2 text-xl font-semibold text-green-700">
-                                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V7h2v2z" />
-                                </svg>
-                                {{ category.name }}
-                            </h2>
-                            <ul class="grid gap-5 sm:grid-cols-2">
-                                <li
-                                    v-for="item in category.items"
-                                    :key="item.id"
-                                    class="flex items-center justify-between rounded-xl border border-gray-100 bg-white p-5 shadow transition hover:shadow-lg"
-                                >
-                                    <div>
-                                        <div class="mb-1">
-                                            <span
-                                                class="inline-block rounded bg-green-100 px-2 py-0.5 font-mono text-xs font-bold text-green-700 shadow-sm"
-                                            >
-                                                #{{ item.id }}
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center gap-2 font-semibold text-gray-800">
-                                            <span v-html="item.name"></span>
-                                        </div>
-                                        <div v-if="item.description" class="mt-1 text-sm text-gray-500" v-html="item.description"></div>
-                                        <div class="mt-1 font-bold text-green-600">€{{ item.price }}</div>
-                                    </div>
-                                    <button
-                                        class="ml-3 rounded-full bg-gradient-to-br from-green-500 to-green-600 p-3 text-white shadow transition hover:from-green-600 hover:to-green-700 focus:ring-2 focus:ring-green-300 focus:outline-none"
-                                        title="Toevoegen"
-                                        @click="
-                                            () => {
-                                                const existing = orderItems.find((o) => o.id === item.id);
-
-                                                if (existing) {
-                                                    existing.amount = (existing.amount || 1) + 1;
-                                                } else {
-                                                    orderItems.push({ ...item, amount: 1 });
-                                                }
-                                            }
-                                        "
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
+                        <MenuCategoryList :categories="filteredCategories" @add-item="addOrderItem" />
                     </div>
                 </section>
 
@@ -169,86 +148,13 @@
                                 <span class="text-lg">Nog geen items toegevoegd.</span>
                             </div>
 
-                            <ul v-else class="mb-0 flex-1 space-y-2 overflow-y-auto pr-2" style="min-height: 0">
-                                <li
-                                    v-for="(orderItem, idx) in orderItems"
-                                    :key="orderItem.id"
-                                    class="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 px-4 py-3 shadow-sm transition hover:shadow"
-                                >
-                                    <!-- Hidden fields for each order item -->
-                                    <input type="hidden" :name="`items[${idx}][id]`" :value="orderItem.id" />
-                                    <input type="hidden" :name="`items[${idx}][amount]`" :value="orderItem.amount || 1" />
-
-                                    <div class="flex flex-col">
-                                        <div class="mb-1">
-                                            <span
-                                                class="inline-block rounded bg-green-100 px-2 py-0.5 font-mono text-xs font-bold text-green-700 shadow-sm"
-                                            >
-                                                #{{ orderItem.id }}
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center gap-2 font-semibold text-gray-800">
-                                            <span v-html="orderItem.name"></span>
-                                        </div>
-                                        <div v-if="orderItem.description" class="mt-1 text-sm text-gray-500" v-html="orderItem.description"></div>
-                                        <div class="mt-1 font-bold text-green-600">€{{ orderItem.price }}</div>
-                                    </div>
-                                    <div class="ml-4 flex items-center gap-1">
-                                        <button
-                                            class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-lg text-gray-600 transition hover:bg-gray-300"
-                                            @click.prevent="
-                                                orderItem.amount = (orderItem.amount || 1) - 1;
-                                                if (orderItem.amount <= 0) orderItems.splice(idx, 1);
-                                            "
-                                            title="Verlaag aantal"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="h-4 w-4"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                                            </svg>
-                                        </button>
-                                        <span
-                                            class="min-w-[2rem] rounded border border-gray-200 bg-white px-2 py-1 text-center font-bold text-gray-700"
-                                            >{{ orderItem.amount || 1 }}</span
-                                        >
-                                        <button
-                                            class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-lg text-gray-600 transition hover:bg-gray-300"
-                                            @click.prevent="orderItem.amount = (orderItem.amount || 1) + 1"
-                                            title="Verhoog aantal"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="h-4 w-4"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                            </svg>
-                                        </button>
-                                        <button
-                                            class="ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-red-100 text-red-500 transition hover:bg-red-200"
-                                            @click.prevent="orderItems.splice(idx, 1)"
-                                            title="Verwijder item"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="h-4 w-4"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </li>
-                            </ul>
+                            <OrderList
+                                v-else
+                                :orderItems="orderItems"
+                                @increase="increaseOrderItem"
+                                @decrease="decreaseOrderItem"
+                                @remove="removeOrderItem"
+                            />
                             <div class="mt-auto flex items-center justify-between rounded-b-xl bg-gray-50 px-6 py-4 shadow-inner">
                                 <div class="text-lg font-semibold text-gray-700">
                                     Totaal:
