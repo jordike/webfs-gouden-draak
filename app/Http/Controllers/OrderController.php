@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MenuCategory;
+use App\Models\MenuItem;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,7 +15,8 @@ class OrderController extends Controller
     public function index()
     {
         return inertia('BackOffice/Orders/Index', [
-            'orders' => []
+            'categories' => MenuCategory::with('items')->get(),
+            'csrfToken' => csrf_token(),
         ]);
     }
 
@@ -29,7 +33,27 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'items' => 'required|array|min:1',
+            'items.*.id' => 'required|integer|exists:menu_items,id',
+            'items.*.amount' => 'required|integer|min:1',
+        ]);
+
+        $order = new Order();
+        $order->date_placed = now();
+        $order->save();
+
+        foreach ($request->items as $item) {
+            $menuItem = MenuItem::findOrFail($item['id']);
+            $order->items()->create([
+                'order_id' => $order->id,
+                'menu_item_id' => $menuItem->id,
+                'amount' => $item['amount'],
+            ]);
+        }
+
+       return redirect()->route('backoffice.orders.index')
+            ->with('success', 'Bestelling succesvol opgeslagen.');
     }
 
     /**

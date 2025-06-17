@@ -17,6 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::prefix('backoffice')->name('backoffice.')->group(function () {
+        Route::get('/', function() {
+            return redirect()->route('backoffice.orders.index');
+        });
+
         Route::resource('orders', OrderController::class)->names('orders');
         Route::inertia('menu', 'BackOffice/Menu')->name('menu');
         Route::resource('sales', SalesController::class)->names('sales');
