@@ -4,6 +4,7 @@
 
 <template>
     <AppLayout>
-        <h1>Menu</h1>
+        <img src="/assets/img/menu/menu-top.jpg" alt="Menu top" />
+        <img src="/assets/img/menu/menu-bottom.jpg" alt="Menu bottom" />
     </AppLayout>
 </template>
