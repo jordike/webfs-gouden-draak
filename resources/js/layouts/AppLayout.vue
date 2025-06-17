@@ -1,12 +1,16 @@
 <script lang="ts" setup>
-    import GoldenBorder from '@/components/border/GoldenBorder.vue';
-    import Header from '@/components/Header.vue';
-    import NavBar from '@/components/NavBar.vue';
-    import { Link } from '@inertiajs/vue3';
+    import GoldenBorder from '@/components/Main/border/GoldenBorder.vue';
+    import Header from '@/components/Main/Header.vue';
+    import NavBar from '@/components/Main/NavBar.vue';
+    import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <main class="flex-column justify-content-center flex text-white">
+    <Head>
+        <title>The Golden Dragon</title>
+    </Head>
+
+    <main class="flex-column justify-content-center flex min-h-screen bg-[#8b0000] font-serif text-white">
         <div class="container mx-[50px] my-[15px] bg-[#ff0000]">
             <Header />
 
