@@ -9,7 +9,7 @@
         <section>
             <h1 class="mb-3 text-center text-[40px] font-bold text-[#ffff00]">
                 Chinees Indische Specaliteiten <br />
-                De Gouden Draak
+                <span class="text-[50px]">De Gouden Draak</span>
             </h1>
 
             <nav class="flex flex-row justify-center gap-[3px]">

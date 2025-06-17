@@ -17,7 +17,7 @@
                     <slot />
                 </div>
 
-                <Link class="mt-3 text-center" href="/contact"> Naar Contact </Link>
+                <Link class="mt-4 text-center text-[#ffff00]" href="/contact"> Naar Contact </Link>
             </GoldenBorder>
         </div>
     </main>
