@@ -133,7 +133,7 @@
             <div v-for="category in filteredCategories" :key="category.name" class="mb-10">
                 <div class="mb-3 flex items-center">
                     <h2 class="text-xl font-semibold text-gray-700">{{ category.name }}</h2>
-                    <span class="ml-3 rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-600">{{ category.items.length }} items</span>
+                    <span class="ml-3 rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-600">{{ category.items.length }} gerechten</span>
                 </div>
                 <div class="overflow-x-auto rounded bg-white shadow">
                     <table class="min-w-full">
