@@ -83,7 +83,7 @@
                 <OrderFilters v-model:filterText="filterText" v-model:filterStartDate="filterStartDate" v-model:filterEndDate="filterEndDate" />
             </div>
             <OrderTotals :totalPrice="totalPrice" :totalVAT="totalVAT" :totalExclVAT="totalExclVAT" />
-            <div v-if="filteredOrders.length === 0" class="rounded-lg bg-yellow-100 p-6 text-center text-yellow-800 shadow-md">
+            <div v-if="filteredOrders.length === 0" class="rounded-lg bg-gray-100 p-6 text-center text-gray-800 shadow-md">
                 <p class="font-medium">Geen verkopen gevonden.</p>
             </div>
             <OrderTable v-else :filteredOrders="filteredOrders" :collapsedOrders="collapsedOrders" @toggleCollapse="toggleCollapse" />
