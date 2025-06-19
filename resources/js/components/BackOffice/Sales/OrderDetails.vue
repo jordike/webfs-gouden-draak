@@ -1,66 +1,63 @@
 <script lang="ts" setup>
-    const props = defineProps<{
-        order: any;
-    }>();
     import axios from 'axios';
     import { ref } from 'vue';
+
+    const props = defineProps<{ order: any }>();
+    const emit = defineEmits(['splitSaved']);
+
     const showSplit = ref(false);
     const partsCount = ref(1);
     const maxParts = 8;
     const parts = ref(Array.from({ length: maxParts }, () => []));
+
     function setPartsCount(count: number) {
         partsCount.value = count;
         while (parts.value.length < count) parts.value.push([]);
         while (parts.value.length > count) parts.value.pop();
     }
+
     function assignToPart(partIdx: number, orderItemId: number, amount: number) {
-        // Calculate total assigned for this item across all parts except this part
         const totalOther = parts.value.reduce((sum, p, idx) => {
             if (idx === partIdx) return sum;
+
             const found = p.find((x) => x.orderItemId === orderItemId);
+
             return sum + (found ? found.amount : 0);
         }, 0);
-        // Find the max allowed for this part
+
         const item = props.order.filteredItems.find((i: any) => i.id === orderItemId);
         const max = item ? item.amount - totalOther : 0;
-        // Clamp the value to the allowed range
-        if (amount > max) amount = max;
-        if (amount < 0) amount = 0;
-        // Update the value for this part
+
+        amount = Math.max(0, Math.min(amount, max));
+
         const part = parts.value[partIdx];
         const existing = part.find((x) => x.orderItemId === orderItemId);
+
         if (existing) {
             existing.amount = amount;
         } else {
             part.push({ orderItemId, amount });
         }
-        // After update, also update the input fields for all other parts for this item
-        // so that their max attribute is correct (force reactivity)
+
         parts.value = [...parts.value];
     }
-    const emit = defineEmits(['splitSaved']);
+
     async function storeBillParts() {
-        try {
-            // 1. Create parts in backend
-            await axios.post(`/backoffice/orders/${props.order.id}/parts`, { count: partsCount.value });
-            // 2. Prepare assignments
-            const assignments = parts.value.slice(0, partsCount.value).flatMap((part, idx) =>
-                part
-                    .filter((x) => x.amount > 0)
-                    .map((x) => ({
-                        order_item_id: x.orderItemId,
-                        order_part_id: idx + 1, // Assumes part_number starts at 1 and is sequential
-                        amount: x.amount,
-                    })),
-            );
-            // 3. Assign items to parts
-            await axios.post(`/backoffice/orders/${props.order.id}/assign-items`, { assignments });
-            emit('splitSaved');
-            alert('Splitsing opgeslagen!');
-        } catch (e) {
-            console.log(e);
-            alert('Fout bij opslaan splitsing.');
-        }
+        await axios.post(`/backoffice/orders/${props.order.id}/parts`, { count: partsCount.value });
+        const assignments = parts.value.slice(0, partsCount.value).flatMap((part, idx) =>
+            part
+                .filter((x) => x.amount > 0)
+                .map((x) => ({
+                    order_item_id: x.orderItemId,
+                    order_part_id: idx + 1,
+                    amount: x.amount,
+                })),
+        );
+
+        await axios.post(`/backoffice/orders/${props.order.id}/assign-items`, { assignments });
+
+        emit('splitSaved');
+        alert('Splitsing opgeslagen!');
     }
 </script>
 
