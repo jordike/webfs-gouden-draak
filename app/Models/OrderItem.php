@@ -12,7 +12,8 @@ class OrderItem extends Model
         'order_id',
         'menu_item_id',
         'amount',
-        'comment'
+        'comment',
+        'order_part_id',
     ];
 
     public function order()
@@ -23,5 +24,10 @@ class OrderItem extends Model
     public function menuItem()
     {
         return $this->belongsTo(MenuItem::class);
+    }
+
+    public function orderPart()
+    {
+        return $this->belongsTo(OrderPart::class);
     }
 }

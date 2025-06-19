@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
         Route::get('sales/daily-overview/{dailyOverview}/download', [SalesController::class, 'downloadDailyOverview'])->name('sales.daily-overview.download');
         Route::get('sales/export/{order}', [SalesController::class, 'export'])->name('sales.export');
         Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+        Route::post('orders/{order}/parts', [OrderController::class, 'createParts'])->name('orders.parts.create');
+        Route::post('orders/{order}/assign-items', [OrderController::class, 'assignItemsToParts'])->name('orders.parts.assign');
     });
 
     Route::get('/review/{order}', [ReviewController::class, 'create'])->name('review.create');
