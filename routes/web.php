@@ -25,5 +25,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('orders', OrderController::class)->names('orders');
         Route::resource('menu', MenuController::class)->names('menu');
         Route::resource('sales', SalesController::class)->names('sales');
+        Route::get('sales/export/{order}', [SalesController::class, 'export'])->name('sales.export');
     });
 });
