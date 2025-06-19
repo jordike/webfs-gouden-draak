@@ -86,7 +86,7 @@
                                     <input
                                         v-model="filter"
                                         type="text"
-                                        placeholder="Zoek op naam, omschrijving of ID..."
+                                        placeholder="Zoek op naam, omschrijving, categorie of ID..."
                                         class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 pl-10 shadow-sm transition focus:border-green-500 focus:ring-2 focus:ring-green-200"
                                     />
                                     <svg
