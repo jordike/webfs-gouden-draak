@@ -25,7 +25,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('orders', OrderController::class)->names('orders');
         Route::resource('menu', MenuController::class)->names('menu');
-        Route::resource('sales', SalesController::class)->names('sales');
+        Route::get('sales', [SalesController::class, 'index'])->name('sales.index');
+        Route::get('sales/daily-overview', [SalesController::class, 'dailyOverview'])->name('sales.daily-overview');
+        Route::get('sales/daily-overview/{dailyOverview}/download', [SalesController::class, 'downloadDailyOverview'])->name('sales.daily-overview.download');
         Route::get('sales/export/{order}', [SalesController::class, 'export'])->name('sales.export');
         Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
     });

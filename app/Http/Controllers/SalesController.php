@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DailyOverview;
 use App\Models\Order;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -38,5 +39,20 @@ class SalesController extends Controller
         ]);
 
         return $pdf->download('order-' . $order->id . '.pdf');
+    }
+
+    public function dailyOverview()
+    {
+        $dailyOverviews = DailyOverview::orderBy('date', 'desc')->get();
+
+        return inertia('BackOffice/Sales/DailyOverview', [
+            'dailyOverviews' => $dailyOverviews
+        ]);
+    }
+
+    public function downloadDailyOverview(DailyOverview $dailyOverview)
+    {
+        return response()
+            ->download($dailyOverview->getFilePath(), 'daily-overview-' . $dailyOverview->date->format('Ymd') . '.xlsx');
     }
 }

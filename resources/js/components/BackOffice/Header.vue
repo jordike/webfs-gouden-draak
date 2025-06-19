@@ -20,6 +20,11 @@
             <Link href="/backoffice/reviews" class="text-lg font-medium text-[#7c5c13] no-underline transition-colors hover:text-[#bfa14a]"
                 >Reviews</Link
             >
+            <Link
+                href="/backoffice/sales/daily-overview"
+                class="text-lg font-medium text-[#7c5c13] no-underline transition-colors hover:text-[#bfa14a]"
+                >Dagoverzicht</Link
+            >
         </nav>
 
         <div class="ml-8">
