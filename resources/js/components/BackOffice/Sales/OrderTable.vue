@@ -21,7 +21,7 @@
                     <th class="border-b px-5 py-4 font-semibold">Order</th>
                     <th class="border-b px-5 py-4 font-semibold">Datum</th>
                     <th class="border-b px-5 py-4 font-semibold">Totaal</th>
-                    <th class="border-b px-5 py-4 font-semibold"></th>
+                    <th class="border-b px-5 py-4 font-semibold" colspan="2"></th>
                 </tr>
             </thead>
 
@@ -43,10 +43,15 @@
                                 {{ collapsedOrders[order.id] ? 'Toon' : 'Verberg' }} details
                             </button>
                         </td>
+                        <td>
+                            <a :href="`/backoffice/sales/export/${order.id}`" class="text-blue-600 hover:underline focus:outline-none">
+                                Download pdf
+                            </a>
+                        </td>
                     </tr>
 
                     <tr v-show="!collapsedOrders[order.id]">
-                        <td colspan="4" class="bg-indigo-50 px-0 py-0">
+                        <td colspan="5" class="bg-indigo-50 px-0 py-0" @click.stop>
                             <OrderDetails :order="order" />
                         </td>
                     </tr>
