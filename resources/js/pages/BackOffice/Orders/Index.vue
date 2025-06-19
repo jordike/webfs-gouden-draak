@@ -14,7 +14,6 @@
 
     const filteredCategories = computed(() => {
         if (!filter.value.trim()) {
-            // Sort all items by id for each category
             return props.categories.map((category) => ({
                 ...category,
                 items: [...category.items].sort((a: any, b: any) => a.id - b.id),
@@ -32,9 +31,8 @@
                         (item.description && item.description.toLowerCase().includes(filterText)) ||
                         item.id.toString().includes(filterText),
                 );
-
-                // Sort items by id
                 const itemsToShow = categoryNameMatches ? category.items : filteredItems;
+
                 return {
                     ...category,
                     items: [...itemsToShow].sort((a: any, b: any) => a.id - b.id),
@@ -43,8 +41,9 @@
             .filter((category) => category.items.length > 0);
     });
 
-    function addOrderItem(item: any) {
+    function addOrderItem(item: any): void {
         const existing = orderItems.value.find((o) => o.id === item.id);
+
         if (existing) {
             existing.amount = (existing.amount || 1) + 1;
         } else {
@@ -52,20 +51,23 @@
         }
     }
 
-    function increaseOrderItem(idx: number) {
+    function increaseOrderItem(idx: number): void {
         const item = orderItems.value[idx];
+
         if (item) item.amount = (item.amount || 1) + 1;
     }
 
-    function decreaseOrderItem(idx: number) {
+    function decreaseOrderItem(idx: number): void {
         const item = orderItems.value[idx];
+
         if (item) {
             item.amount = (item.amount || 1) - 1;
+
             if (item.amount <= 0) orderItems.value.splice(idx, 1);
         }
     }
 
-    function removeOrderItem(idx: number) {
+    function removeOrderItem(idx: number): void {
         orderItems.value.splice(idx, 1);
     }
 </script>
@@ -74,9 +76,7 @@
     <BackOfficeLayout>
         <div class="min-h-screen bg-gray-50 p-6">
             <div class="flex flex-col gap-10 lg:flex-row">
-                <!-- Menu Section -->
                 <section class="flex-1">
-                    <!-- Sticky Header Start -->
                     <div class="sticky top-0 z-20 border-b-1 border-gray-200 bg-gray-50 pt-2 pb-4">
                         <div class="mx-auto max-w-3xl">
                             <h2 class="mb-6 text-2xl font-bold text-green-700">Menu</h2>
@@ -103,6 +103,7 @@
                                         />
                                     </svg>
                                 </div>
+
                                 <button
                                     v-if="filter"
                                     @click="filter = ''"
@@ -129,11 +130,11 @@
                             </svg>
                             Geen resultaten gevonden.
                         </div>
+
                         <MenuCategoryList :categories="filteredCategories" @add-item="addOrderItem" />
                     </div>
                 </section>
 
-                <!-- Bestelling Section -->
                 <section class="flex-1 border-l-1 border-gray-200 pl-6 lg:max-w-md">
                     <div class="sticky top-8">
                         <h2 class="mb-6 text-2xl font-bold text-green-700">Bestelling</h2>
@@ -155,6 +156,7 @@
                                 @decrease="decreaseOrderItem"
                                 @remove="removeOrderItem"
                             />
+
                             <div class="mt-auto flex items-center justify-between rounded-b-xl bg-gray-50 px-6 py-4 shadow-inner">
                                 <div class="text-lg font-semibold text-gray-700">
                                     Totaal:
@@ -162,6 +164,7 @@
                                         €{{ orderItems.reduce((sum, item) => sum + item.price * (item.amount || 1), 0).toFixed(2) }}
                                     </span>
                                 </div>
+
                                 <button
                                     class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 px-6 py-2 font-bold text-white shadow transition hover:from-green-600 hover:to-green-700"
                                     type="submit"

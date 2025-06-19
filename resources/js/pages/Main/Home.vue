@@ -18,10 +18,12 @@
                     <span class="w-80 text-right">Koe Loe Yuk</span>
                     <span class="w-80 text-left">Foe Yong Hai</span>
                 </div>
+
                 <div class="mb-2 flex flex-row justify-center gap-12">
                     <span class="w-80 text-right">Tjap Tjoy</span>
                     <span class="w-80 text-left">Garnalen met Gebakken Knoflook</span>
                 </div>
+
                 <div class="mb-2 flex flex-row justify-center gap-12">
                     <span class="w-80 text-right">Babi Pangang</span>
                     <span class="w-80 text-left">Kipfilet in Zwarte Bonen saus</span>

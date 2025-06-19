@@ -2,10 +2,11 @@
     import { defineEmits, defineProps } from 'vue';
     import MenuCategory from './MenuCategory.vue';
 
-    const props = defineProps<{
+    defineProps<{
         categories: Array<any>;
     }>();
-    const emit = defineEmits(['add-item']);
+
+    defineEmits(['add-item']);
 </script>
 
 <template>

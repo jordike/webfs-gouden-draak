@@ -2,10 +2,11 @@
     import { defineEmits, defineProps } from 'vue';
     import OrderItemCard from './OrderItemCard.vue';
 
-    const props = defineProps<{
+    defineProps<{
         orderItems: Array<any>;
     }>();
-    const emit = defineEmits(['increase', 'decrease', 'remove']);
+
+    defineEmits(['increase', 'decrease', 'remove']);
 </script>
 
 <template>

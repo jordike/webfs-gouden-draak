@@ -12,10 +12,8 @@
     const filterStartDate = ref('');
     const filterEndDate = ref('');
 
-    // Track collapsed state per order
     const collapsedOrders = reactive<{ [key: number]: boolean }>({});
 
-    // Initialize all orders as collapsed when orders change
     watch(
         orders,
         (newOrders) => {
@@ -39,7 +37,6 @@
                     matchesEndDate = order.date_placed && order.date_placed <= filterEndDate.value;
                 }
 
-                // Check if any item or order id matches the filterText
                 const matchesText =
                     filterText.value === '' ||
                     order.id.toString().includes(filterText.value) ||
@@ -48,7 +45,6 @@
                 return matchesText && matchesStartDate && matchesEndDate;
             })
             .map((order) => {
-                // Filter items by text if needed
                 const filteredItems = order.items.filter((item: any) => {
                     return (
                         filterText.value === '' ||
@@ -56,7 +52,11 @@
                         (item.menu_item?.name ?? '').toLowerCase().includes(filterText.value.toLowerCase())
                     );
                 });
-                return { ...order, filteredItems };
+
+                return {
+                    ...order,
+                    filteredItems,
+                };
             })
             .filter((order) => order.filteredItems.length > 0);
     });
@@ -70,7 +70,7 @@
     const totalVAT = computed(() => totalPrice.value * 0.21);
     const totalExclVAT = computed(() => totalPrice.value / 1.21);
 
-    function toggleCollapse(orderId: number) {
+    function toggleCollapse(orderId: number): void {
         collapsedOrders[orderId] = !collapsedOrders[orderId];
     }
 </script>
@@ -80,12 +80,16 @@
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-white p-6 md:p-10">
             <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h1 class="text-3xl font-extrabold tracking-tight text-blue-900">Verkoopoverzicht</h1>
+
                 <OrderFilters v-model:filterText="filterText" v-model:filterStartDate="filterStartDate" v-model:filterEndDate="filterEndDate" />
             </div>
+
             <OrderTotals :totalPrice="totalPrice" :totalVAT="totalVAT" :totalExclVAT="totalExclVAT" />
+
             <div v-if="filteredOrders.length === 0" class="rounded-lg bg-gray-100 p-6 text-center text-gray-800 shadow-md">
                 <p class="font-medium">Geen verkopen gevonden.</p>
             </div>
+
             <OrderTable v-else :filteredOrders="filteredOrders" :collapsedOrders="collapsedOrders" @toggleCollapse="toggleCollapse" />
         </div>
     </BackOfficeLayout>

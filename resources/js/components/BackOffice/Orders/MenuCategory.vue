@@ -2,10 +2,11 @@
     import { defineEmits, defineProps } from 'vue';
     import MenuItemCard from './MenuItemCard.vue';
 
-    const props = defineProps<{
+    defineProps<{
         category: any;
     }>();
-    const emit = defineEmits(['add-item']);
+
+    defineEmits(['add-item']);
 </script>
 
 <template>
@@ -16,6 +17,7 @@
             </svg>
             {{ category.name }}
         </h2>
+
         <ul class="grid gap-5 sm:grid-cols-2">
             <li v-for="item in category.items" :key="item.id">
                 <MenuItemCard :item="item" @add="$emit('add-item', $event)" />

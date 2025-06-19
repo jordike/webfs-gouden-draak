@@ -8,6 +8,7 @@
             <img src="/assets/img/dragon-small.png" alt="Gouden Draak Logo" class="mr-4 h-10" />
             <h1 class="m-0 text-2xl font-bold text-[#7c5c13]">Gouden Draak BackOffice</h1>
         </div>
+
         <nav class="flex gap-6">
             <Link href="/backoffice/orders" class="text-lg font-medium text-[#7c5c13] no-underline transition-colors hover:text-[#bfa14a]"
                 >Kassa</Link
@@ -17,6 +18,7 @@
                 >Verkoop overzicht</Link
             >
         </nav>
+
         <div class="ml-8">
             <Link
                 href="/logout"
