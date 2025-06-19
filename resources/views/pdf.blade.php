@@ -158,6 +158,13 @@
 
         <div class="footer">
             Bedankt voor uw bestelling!
+
+            @if (isset($qrCode))
+                <div style="margin-top: 8px;">
+                    <div>Geef uw mening:</div>
+                    <img src="{{ $qrCode }}" alt="Review QR Code" style="width:60px;height:60px;display:block;margin:4px auto 0 auto;">
+                </div>
+            @endif
         </div>
     </body>
 
