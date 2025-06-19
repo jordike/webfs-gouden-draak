@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Main/Home')->name('home');
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('orders', OrderController::class)->names('orders');
         Route::resource('menu', MenuController::class)->names('menu');
+        Route::resource('tables', TableController::class)->names('tables');
         Route::get('sales', [SalesController::class, 'index'])->name('sales.index');
         Route::get('sales/daily-overview', [SalesController::class, 'dailyOverview'])->name('sales.daily-overview');
         Route::get('sales/daily-overview/{dailyOverview}/download', [SalesController::class, 'downloadDailyOverview'])->name('sales.daily-overview.download');
