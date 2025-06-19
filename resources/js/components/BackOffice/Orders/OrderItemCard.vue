@@ -1,20 +1,29 @@
 <script lang="ts" setup>
-    import { defineEmits, defineProps } from 'vue';
+    import { defineEmits, defineProps, ref, watch } from 'vue';
 
-    defineProps<{
+    const props = defineProps<{
         orderItem: any;
         idx: number;
     }>();
 
-    defineEmits(['increase', 'decrease', 'remove']);
+    const emit = defineEmits(['increase', 'decrease', 'remove', 'update:comment']);
+
+    // Local comment state, default to orderItem.comment if present
+    const comment = ref(props.orderItem.comment || '');
+
+    // Emit comment changes to parent
+    watch(comment, (val) => {
+        emit('update:comment', { idx: props.idx, comment: val });
+    });
 </script>
 
 <template>
     <li class="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 px-4 py-3 shadow-sm transition hover:shadow">
         <input type="hidden" :name="`items[${idx}][id]`" :value="orderItem.id" />
         <input type="hidden" :name="`items[${idx}][amount]`" :value="orderItem.amount || 1" />
+        <input type="hidden" :name="`items[${idx}][comment]`" :value="comment" />
 
-        <div class="flex flex-col">
+        <div class="flex flex-1 flex-col">
             <div class="mb-1">
                 <span class="inline-block rounded bg-green-100 px-2 py-0.5 font-mono text-xs font-bold text-green-700 shadow-sm">
                     #{{ orderItem.id }}
@@ -25,6 +34,13 @@
             </div>
             <div v-if="orderItem.description" class="mt-1 text-sm text-gray-500" v-html="orderItem.description"></div>
             <div class="mt-1 font-bold text-green-600">€{{ orderItem.price }}</div>
+            <textarea
+                v-model="comment"
+                class="mt-2 w-full rounded border border-gray-200 px-2 py-1 text-sm text-gray-700 focus:ring-2 focus:ring-green-200 focus:outline-none"
+                :name="`items[${idx}][comment]`"
+                placeholder="Opmerking toevoegen..."
+                rows="2"
+            ></textarea>
         </div>
 
         <div class="ml-4 flex items-center gap-1">

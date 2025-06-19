@@ -11,7 +11,8 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'menu_item_id',
-        'amount'
+        'amount',
+        'comment'
     ];
 
     public function order()

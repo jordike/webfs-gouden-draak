@@ -37,6 +37,7 @@ class OrderController extends Controller
             'items' => 'required|array|min:1',
             'items.*.id' => 'required|integer|exists:menu_items,id',
             'items.*.amount' => 'required|integer|min:1',
+            'items.*.comment' => 'nullable|string',
         ]);
 
         $order = new Order();
@@ -45,14 +46,16 @@ class OrderController extends Controller
 
         foreach ($request->items as $item) {
             $menuItem = MenuItem::findOrFail($item['id']);
+
             $order->items()->create([
                 'order_id' => $order->id,
                 'menu_item_id' => $menuItem->id,
                 'amount' => $item['amount'],
+                'comment' => $item['comment'],
             ]);
         }
 
-       return redirect()->route('backoffice.orders.index')
+        return redirect()->route('backoffice.orders.index')
             ->with('success', 'Bestelling succesvol opgeslagen.');
     }
 
