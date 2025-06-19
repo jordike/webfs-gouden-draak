@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::resource('orders', OrderController::class)->names('orders');
-        Route::inertia('menu', 'BackOffice/Menu')->name('menu');
+        Route::resource('menu', MenuController::class)->names('menu');
         Route::resource('sales', SalesController::class)->names('sales');
     });
 });

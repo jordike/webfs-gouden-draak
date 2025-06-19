@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+    import OrderDetails from './OrderDetails.vue';
+
+    defineProps<{
+        filteredOrders: any[];
+        collapsedOrders: Record<number, boolean>;
+    }>();
+
+    const emit = defineEmits(['toggleCollapse']);
+
+    function toggleCollapse(orderId: number): void {
+        emit('toggleCollapse', orderId);
+    }
+</script>
+
 <template>
     <div class="overflow-x-auto rounded-lg bg-white shadow-lg">
         <table class="w-full table-auto border-collapse">
@@ -9,6 +24,7 @@
                     <th class="border-b px-5 py-4 font-semibold"></th>
                 </tr>
             </thead>
+
             <tbody>
                 <template v-for="order in filteredOrders" :key="order.id">
                     <tr
@@ -28,6 +44,7 @@
                             </button>
                         </td>
                     </tr>
+
                     <tr v-show="!collapsedOrders[order.id]">
                         <td colspan="4" class="bg-indigo-50 px-0 py-0">
                             <OrderDetails :order="order" />
@@ -38,15 +55,3 @@
         </table>
     </div>
 </template>
-
-<script lang="ts" setup>
-    import OrderDetails from './OrderDetails.vue';
-    const props = defineProps<{
-        filteredOrders: any[];
-        collapsedOrders: Record<number, boolean>;
-    }>();
-    const emit = defineEmits(['toggleCollapse']);
-    function toggleCollapse(orderId: number) {
-        emit('toggleCollapse', orderId);
-    }
-</script>

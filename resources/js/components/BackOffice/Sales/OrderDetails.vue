@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+    defineProps<{
+        order: any;
+    }>();
+</script>
+
 <template>
     <div class="rounded-b-lg border-t border-indigo-200 p-4">
         <table class="mb-2 w-full table-auto">
@@ -9,6 +15,7 @@
                     <th class="px-2 py-1 text-left">Subtotaal</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr v-for="item in order.filteredItems" :key="item.id">
                     <td class="px-2 py-1" v-html="item.menu_item?.name ?? item.menu_item_id"></td>
@@ -18,6 +25,7 @@
                 </tr>
             </tbody>
         </table>
+
         <div class="mt-4 flex flex-wrap justify-end gap-6 rounded-lg bg-gray-200 p-4 text-base font-medium text-blue-900">
             <div class="flex items-center gap-2">
                 <span class="min-w-[140px]">Totaal (incl. btw):</span>
@@ -30,6 +38,7 @@
                     }}
                 </span>
             </div>
+
             <div class="flex items-center gap-2">
                 <span class="min-w-[120px]">Totaal btw (21%):</span>
                 <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">
@@ -41,6 +50,7 @@
                     }}
                 </span>
             </div>
+
             <div class="flex items-center gap-2">
                 <span class="min-w-[140px]">Totaal (excl. btw):</span>
                 <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">
@@ -55,9 +65,3 @@
         </div>
     </div>
 </template>
-
-<script lang="ts" setup>
-    const props = defineProps<{
-        order: any;
-    }>();
-</script>
