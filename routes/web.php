@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('menu', MenuController::class)->names('menu');
         Route::resource('sales', SalesController::class)->names('sales');
         Route::get('sales/export/{order}', [SalesController::class, 'export'])->name('sales.export');
+        Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
     });
+
+    Route::get('/review/{order}', [ReviewController::class, 'create'])->name('review.create');
+    Route::post('/review/{order}', [ReviewController::class, 'store'])->name('review.store');
 });
