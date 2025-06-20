@@ -112,49 +112,89 @@
 
         @php
             $total = 0;
-
-            $order->load('items.menuItem');
+            $order->load(['items.menuItem', 'parts.items.menuItem']);
         @endphp
 
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 45%;">Naam</th>
-                    <th class="text-right" style="width: 15%;">Aantal</th>
-                    <th class="text-right" style="width: 20%;">Prijs</th>
-                    <th class="text-right" style="width: 20%;">Subtotaal</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($order->items as $item)
-                    @php
-                        $menuItem = $item->menuItem;
-                        $lineTotal = $menuItem->price * $item->amount;
-                        $total += $lineTotal;
-                    @endphp
-
+        @if ($order->parts && $order->parts->count())
+            <h2 style="margin-bottom: 6px; font-size: 15px; color: #333;">Rekening gesplitst in {{ $order->parts->count() }} delen:</h2>
+            @foreach ($order->parts as $part)
+                @if ($part->items->count())
+                    <div style="margin-bottom: 10px;">
+                        <div style="font-weight: bold; color: #444;">Deel {{ $part->part_number }}</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 45%;">Naam</th>
+                                    <th class="text-right" style="width: 15%;">Aantal</th>
+                                    <th class="text-right" style="width: 20%;">Prijs</th>
+                                    <th class="text-right" style="width: 20%;">Subtotaal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $partTotal = 0; @endphp
+                                @foreach ($part->items as $item)
+                                    @php
+                                        $menuItem = $item->menuItem;
+                                        $lineTotal = $menuItem->price * $item->amount;
+                                        $partTotal += $lineTotal;
+                                    @endphp
+                                    <tr>
+                                        <td>{!! $menuItem->name !!}</td>
+                                        <td class="text-right">{{ $item->amount }}</td>
+                                        <td class="text-right">&euro;{{ number_format($menuItem->price, 2) }}</td>
+                                        <td class="text-right">&euro;{{ number_format($lineTotal, 2) }}</td>
+                                    </tr>
+                                @endforeach
+                                <tr class="total-row">
+                                    <td colspan="3">Totaal deel {{ $part->part_number }}</td>
+                                    <td class="text-right">&euro;{{ number_format($partTotal, 2) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            @endforeach
+        @else
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <div>{!! $menuItem->name !!}</div>
-
-                            @if ($menuItem->description)
-                                <div class="desc">{!! $menuItem->description !!}</div>
-                            @endif
-                        </td>
-                        <td class="text-right">{{ $item->amount }}</td>
-                        <td class="text-right">&euro;{{ number_format($menuItem->price, 2) }}</td>
-                        <td class="text-right">&euro;{{ number_format($lineTotal, 2) }}</td>
+                        <th style="width: 45%;">Naam</th>
+                        <th class="text-right" style="width: 15%;">Aantal</th>
+                        <th class="text-right" style="width: 20%;">Prijs</th>
+                        <th class="text-right" style="width: 20%;">Subtotaal</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach ($order->items as $item)
+                        @php
+                            $menuItem = $item->menuItem;
+                            $lineTotal = $menuItem->price * $item->amount;
+                            $total += $lineTotal;
+                        @endphp
 
-                    @if ($loop->last)
-                        <tr class="total-row">
-                            <td colspan="3">Totaal</td>
-                            <td class="text-right">&euro;{{ number_format($total, 2) }}</td>
+                        <tr>
+                            <td>
+                                <div>{!! $menuItem->name !!}</div>
+
+                                @if ($menuItem->description)
+                                    <div class="desc">{!! $menuItem->description !!}</div>
+                                @endif
+                            </td>
+                            <td class="text-right">{{ $item->amount }}</td>
+                            <td class="text-right">&euro;{{ number_format($menuItem->price, 2) }}</td>
+                            <td class="text-right">&euro;{{ number_format($lineTotal, 2) }}</td>
                         </tr>
-                    @endif
-                @endforeach
-            </tbody>
-        </table>
+
+                        @if ($loop->last)
+                            <tr class="total-row">
+                                <td colspan="3">Totaal</td>
+                                <td class="text-right">&euro;{{ number_format($total, 2) }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
 
         <div class="footer">
             Bedankt voor uw bestelling!

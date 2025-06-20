@@ -27,11 +27,7 @@
 
             <tbody>
                 <template v-for="order in filteredOrders" :key="order.id">
-                    <tr
-                        class="cursor-pointer transition-colors hover:bg-indigo-100"
-                        :class="{ 'border-b-2 border-indigo-300': !collapsedOrders[order.id] }"
-                        @click="toggleCollapse(order.id)"
-                    >
+                    <tr class="transition-colors hover:bg-indigo-100" :class="{ 'border-b-2 border-indigo-300': !collapsedOrders[order.id] }">
                         <td class="border-b px-5 py-3 font-semibold">#{{ order.id }}</td>
                         <td class="border-b px-5 py-3">{{ order.date_placed }}</td>
                         <td class="border-b px-5 py-3">

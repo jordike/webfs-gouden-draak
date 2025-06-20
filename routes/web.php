@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Main/Home')->name('home');
@@ -25,11 +26,14 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('orders', OrderController::class)->names('orders');
         Route::resource('menu', MenuController::class)->names('menu');
+        Route::resource('tables', TableController::class)->names('tables');
         Route::get('sales', [SalesController::class, 'index'])->name('sales.index');
         Route::get('sales/daily-overview', [SalesController::class, 'dailyOverview'])->name('sales.daily-overview');
         Route::get('sales/daily-overview/{dailyOverview}/download', [SalesController::class, 'downloadDailyOverview'])->name('sales.daily-overview.download');
         Route::get('sales/export/{order}', [SalesController::class, 'export'])->name('sales.export');
         Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+        Route::post('orders/{order}/parts', [OrderController::class, 'createParts'])->name('orders.parts.create');
+        Route::post('orders/{order}/assign-items', [OrderController::class, 'assignItemsToParts'])->name('orders.parts.assign');
     });
 
     Route::get('/review/{order}', [ReviewController::class, 'create'])->name('review.create');

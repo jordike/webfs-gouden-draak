@@ -25,6 +25,9 @@
                 class="text-lg font-medium text-[#7c5c13] no-underline transition-colors hover:text-[#bfa14a]"
                 >Dagoverzicht</Link
             >
+            <Link href="/backoffice/tables" class="text-lg font-medium text-[#7c5c13] no-underline transition-colors hover:text-[#bfa14a]"
+                >Tafels</Link
+            >
         </nav>
 
         <div class="ml-8">
