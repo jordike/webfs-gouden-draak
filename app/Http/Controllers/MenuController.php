@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MenuCategory;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 class MenuController extends Controller
 {
@@ -133,5 +134,15 @@ class MenuController extends Controller
 
         return redirect()->route('backoffice.menu.index')
             ->with('success', 'Menu-item succesvol verwijderd.');
+    }
+
+    public function download()
+    {
+        $categories = MenuCategory::with(['items' => function ($query) {
+            $query->orderBy('id');
+        }])->get();
+        $pdf = Pdf::view('pdf.menu', ['categories' => $categories]);
+
+        return $pdf->download('menu.pdf');
     }
 }

@@ -3,11 +3,14 @@
     import Header from '@/components/Main/Header.vue';
     import NavBar from '@/components/Main/NavBar.vue';
     import { Head, Link } from '@inertiajs/vue3';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 </script>
 
 <template>
     <Head>
-        <title>The Golden Dragon</title>
+        <title>{{ t('restaurant_name') }}</title>
     </Head>
 
     <main class="flex-column justify-content-center flex min-h-screen bg-[#8b0000] font-serif text-white">
@@ -21,7 +24,9 @@
                     <slot />
                 </div>
 
-                <Link class="mt-4 text-center text-[#ffff00]" href="/contact"> Naar Contact </Link>
+                <Link class="mt-4 text-center text-[#ffff00]" href="/contact">
+                    {{ t('main.navbar.go_to_contact') }}
+                </Link>
             </GoldenBorder>
         </div>
     </main>

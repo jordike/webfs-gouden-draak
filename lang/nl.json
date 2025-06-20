@@ -1,0 +1,213 @@
+{
+    "restaurant_name": "De Gouden Draak",
+    "main": {
+        "header": {
+            "title": "Chinees Indische Specaliteiten",
+            "marquee": "Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!"
+        },
+        "navbar": {
+            "menu_card": "Menukaart",
+            "news": "Nieuws",
+            "contact": "Contact",
+            "go_to_contact": "Naar contact"
+        },
+        "contact": {
+            "instructions": "De Gouden Draak is eenvoudig te vinden, vlak bij het centrum, 5 minuten lopen achter het centraal station.",
+            "address": "Onderwijsboulevard 215, kamer OG112<br />5223 DE 's-Hertogenbosch"
+        },
+        "home": {
+            "intro": "Al jaren is De Gouden Draak een begrip als het gaat om de beste afhaalgerechten in 's-Hertogenbosch. <br />Graag trakteren we u op authentieke gerechten uit de Cantonese keuken.",
+            "student_offer_title": "Speciale Studentenaanbieding",
+            "student_offer_subtitle": "Chinese Rijsttafel (2 personen)",
+            "student_offer_instruction": "Maak een keuze uit 3 van onze onderstaande keuzegerechten:",
+            "dishes": {
+                "koe_loe_yuk": "Koe Loe Yuk",
+                "foe_yong_hai": "Foe Yong Hai",
+                "tjap_tjoy": "Tjap Tjoy",
+                "garnalen_knoflook": "Garnalen met Gebakken Knoflook",
+                "babi_pangang": "Babi Pangang",
+                "kipfilet_bonensaus": "Kipfilet in Zwarte Bonen saus"
+            },
+            "with_rice": "Met witte rijst. (Nasi of bami voor meerprijs mogelijk.)",
+            "price": "Prijs: €21,00"
+        },
+        "menu": {
+            "download_current_menu": "Download actuale menukaart"
+        },
+        "news": {
+            "message": "Door de Corona crisis is De Gouden Draak op het moment slechts beperkt open.<br />Het restaurant-gedeelte is gesloten. U kan uw favoriete gerechten nog wel afhalen."
+        }
+    },
+    "backoffice": {
+        "header": {
+            "kassa": "Kassa",
+            "menu": "Menu",
+            "sales_overview": "Verkoop overzicht",
+            "reviews": "Reviews",
+            "daily_overview": "Dagoverzicht",
+            "tables": "Tafels",
+            "logout": "Uitloggen",
+            "title": "Gouden Draak BackOffice"
+        },
+        "menu": {
+            "new_item": "Nieuw menu-item",
+            "edit_item": "Menu-item bewerken",
+            "name": "Naam",
+            "description": "Beschrijving",
+            "price": "Prijs (€)",
+            "category": "Categorie",
+            "new_category": "Nieuwe categorie...",
+            "create": "Aanmaken",
+            "cancel": "Annuleren",
+            "save": "Opslaan",
+            "actions": "Acties",
+            "edit": "Bewerken",
+            "delete": "Verwijderen",
+            "items_in_category": "{count} gerechten",
+            "no_items": "Geen items in deze categorie.",
+            "title": "Menu Beheer",
+            "none_found": "Geen items gevonden die overeenkomen met je filter."
+        },
+        "orders": {
+            "add": "Toevoegen",
+            "increase": "Verhoog aantal",
+            "decrease": "Verlaag aantal",
+            "remove": "Verwijder item",
+            "comment_placeholder": "Opmerking toevoegen...",
+            "order_id": "Bestel-ID",
+            "dish_name": "Gerechtnaam",
+            "menu": "Menu",
+            "search_placeholder": "Zoek op naam, omschrijving, categorie of ID...",
+            "clear_search": "Wis zoekopdracht",
+            "none_found": "Geen resultaten gevonden.",
+            "order": "Bestelling",
+            "no_items": "Nog geen items toegevoegd.",
+            "total": "Totaal:",
+            "pay": "Betalen"
+        },
+        "sales": {
+            "order": "Order",
+            "date": "Datum",
+            "total": "Totaal",
+            "show_details": "Toon details",
+            "hide_details": "Verberg details",
+            "download_pdf": "Download pdf",
+            "total_incl_vat": "Totaal (incl. btw):",
+            "total_vat": "Totaal btw (21%):",
+            "total_excl_vat": "Totaal (excl. btw):",
+            "filters": {
+                "order_id_or_dish": "Bestel-ID of Gerechtnaam",
+                "start_date": "Startdatum",
+                "end_date": "Einddatum",
+                "clear_filters": "Filters wissen"
+            },
+            "title": "Verkoopoverzicht",
+            "none_found": "Geen verkopen gevonden."
+        },
+        "order_details": {
+            "split_bill": "Rekening splitsen",
+            "cancel_split": "Annuleer splitsing",
+            "number_of_parts": "Aantal delen (max 8):",
+            "save_split": "Opslaan splitsing",
+            "part": "Deel {number}",
+            "max": "max: {amount}",
+            "no_comments": "Geen opmerkingen",
+            "subtotal": "Subtotaal"
+        },
+        "pages": {
+            "login": {
+                "title": "Login",
+                "email": "Email",
+                "email_placeholder": "Voer uw e-mailadres in",
+                "password": "Wachtwoord",
+                "password_placeholder": "Voer uw wachtwoord in",
+                "button": "Login"
+            },
+            "tables": {
+                "title": "Tafels",
+                "new_table": "Nieuwe tafel",
+                "table": "Tafel",
+                "num_customers": "Aantal klanten",
+                "deluxe_menu": "Deluxe menu",
+                "actions": "Acties",
+                "edit": "Bewerken",
+                "delete": "Verwijderen",
+                "not_found": "Geen tafels gevonden.",
+                "add": "Toevoegen",
+                "save": "Opslaan",
+                "cancel": "Annuleren",
+                "edit_table": "Tafel bewerken",
+                "add_table": "Nieuwe tafel toevoegen",
+                "customers": "Klanten (max 8)",
+                "customer_name_placeholder": "Naam klant {number}",
+                "customer_age_placeholder": "Leeftijd",
+                "yes": "Ja",
+                "no": "Nee",
+                "delete_confirm": "Weet je zeker dat je deze tafel wilt verwijderen?",
+                "close": "Sluiten"
+            },
+            "sales": {
+                "title": "Verkoopoverzicht",
+                "none_found": "Geen verkopen gevonden."
+            },
+            "daily_overview": {
+                "title": "Dagelijkse Overzichten",
+                "date": "Datum",
+                "download": "Download",
+                "download_excel": "Download Excel",
+                "none_found": "Geen overzichten gevonden."
+            },
+            "orders": {
+                "menu": "Menu",
+                "search_placeholder": "Zoek op naam, omschrijving, categorie of ID...",
+                "clear_search": "Wis zoekopdracht",
+                "none_found": "Geen resultaten gevonden.",
+                "order": "Bestelling",
+                "no_items": "Nog geen items toegevoegd.",
+                "total": "Totaal:",
+                "pay": "Betalen"
+            }
+        },
+        "reviews": {
+            "title": "Reviews",
+            "none_found": "Nog geen reviews.",
+            "name": "Naam",
+            "date": "Datum",
+            "rating": "Beoordeling",
+            "atmosphere": "Sfeer",
+            "service": "Service",
+            "favorite_food": "Favoriet gerecht",
+            "suggestions": "Suggesties",
+            "anonymous": "Anoniem",
+            "unknown": "Onbekend",
+            "dash": "—",
+            "labels": {
+                "slecht": "Slecht",
+                "matig": "Matig",
+                "goed": "Goed",
+                "erg_goed": "Erg goed",
+                "uitstekend": "Uitstekend"
+            },
+            "thank_you_title": "Bedankt voor uw review!",
+            "thank_you_message": "Uw feedback is succesvol ontvangen.",
+            "leave_review": "Laat uw review achter 🎉",
+            "form": {
+                "name": "Naam",
+                "name_optional": "(optioneel)",
+                "name_placeholder": "Uw naam",
+                "rating": "Hoeveel sterren geeft u ons?",
+                "atmosphere": "Hoe vond u de sfeer?",
+                "service": "Hoe was de service?",
+                "favorite_food": "Wat was uw favoriete gerecht?",
+                "favorite_food_optional": "(optioneel)",
+                "favorite_food_placeholder": "Bijv. Stoofpotje, Mosselen, ...",
+                "improvement_suggestions": "Heeft u suggesties of verbeterpunten?",
+                "improvement_suggestions_optional": "(optioneel)",
+                "improvement_suggestions_placeholder": "Laat hier uw suggesties of verbeterpunten achter...",
+                "submit": "Verstuur review",
+                "stars_aria": "Geef {count} sterren",
+                "atmosphere_aria": "Sfeer: {count}"
+            }
+        }
+    }
+}

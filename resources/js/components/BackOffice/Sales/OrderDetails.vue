@@ -1,6 +1,9 @@
 <script lang="ts" setup>
     import axios from 'axios';
     import { ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 
     const props = defineProps<{ order: any }>();
     const emit = defineEmits(['splitSaved']);
@@ -57,7 +60,7 @@
         await axios.post(`/backoffice/orders/${props.order.id}/assign-items`, { assignments });
 
         emit('splitSaved');
-        alert('Splitsing opgeslagen!');
+        alert(t('backoffice.order_details.save_split') + '!');
     }
 </script>
 
@@ -65,12 +68,12 @@
     <div class="rounded-b-lg border-t border-indigo-200 p-4">
         <div class="mb-4 flex justify-end">
             <button class="rounded bg-indigo-600 px-4 py-2 font-semibold text-white shadow hover:bg-indigo-700" @click="showSplit = !showSplit">
-                {{ showSplit ? 'Annuleer splitsing' : 'Rekening splitsen' }}
+                {{ showSplit ? t('backoffice.order_details.cancel_split') : t('backoffice.order_details.split_bill') }}
             </button>
         </div>
         <div v-if="showSplit">
             <div class="mb-4 flex items-center gap-2">
-                <label for="partsCount" class="font-semibold">Aantal delen (max 8):</label>
+                <label for="partsCount" class="font-semibold">{{ t('backoffice.order_details.number_of_parts') }}</label>
                 <input
                     id="partsCount"
                     type="number"
@@ -87,12 +90,12 @@
                     :key="idx"
                     class="rounded-lg border border-indigo-200 bg-indigo-50 p-2 shadow-sm"
                 >
-                    <h3 class="mb-1 text-base font-bold text-indigo-800">Deel {{ idx + 1 }}</h3>
+                    <h3 class="mb-1 text-base font-bold text-indigo-800">{{ t('backoffice.order_details.part', { number: idx + 1 }) }}</h3>
                     <div class="space-y-1">
                         <div v-for="item in order.filteredItems" :key="item.id" class="flex items-center gap-2">
                             <label :for="`deel-${idx}-item-${item.id}`" class="flex-1 truncate"
                                 >{{ item.menu_item?.name ?? item.menu_item_id }}
-                                <span class="text-xs text-gray-500">(max: {{ item.amount }})</span></label
+                                <span class="text-xs text-gray-500">({{ t('backoffice.order_details.max', { amount: item.amount }) }})</span></label
                             >
                             <input
                                 :id="`deel-${idx}-item-${item.id}`"
@@ -109,7 +112,7 @@
             </div>
             <div class="mt-2 flex justify-end">
                 <button class="rounded bg-indigo-600 px-4 py-2 font-semibold text-white shadow hover:bg-indigo-700" @click="storeBillParts">
-                    Opslaan splitsing
+                    {{ t('backoffice.order_details.save_split') }}
                 </button>
             </div>
         </div>
@@ -118,11 +121,18 @@
             <table class="mb-2 w-full table-auto">
                 <thead>
                     <tr>
-                        <th class="px-2 py-1 text-left">Gerecht</th>
-                        <th class="px-2 py-1 text-left">Prijs</th>
-                        <th class="px-2 py-1 text-left">Aantal</th>
-                        <th class="px-2 py-1 text-left">Opmerkingen</th>
-                        <th class="px-2 py-1 text-left">Subtotaal</th>
+                        <th class="px-2 py-1 text-left">{{ t('backoffice.orders.dish_name') }}</th>
+                        <th class="px-2 py-1 text-left">{{ t('backoffice.menu.price') }}</th>
+                        <th class="px-2 py-1 text-left">{{ t('backoffice.orders.increase').replace('Verhoog aantal', 'Aantal') }}</th>
+                        <th class="px-2 py-1 text-left">
+                            {{
+                                t('backoffice.orders.comment_placeholder').replace(
+                                    'Opmerking toevoegen...',
+                                    t('backoffice.order_details.no_comments'),
+                                )
+                            }}
+                        </th>
+                        <th class="px-2 py-1 text-left">{{ t('backoffice.order_details.subtotal') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,14 +140,14 @@
                         <td class="px-2 py-1" v-html="item.menu_item?.name ?? item.menu_item_id"></td>
                         <td class="px-2 py-1">€ {{ item.menu_item?.price ?? 0 }}</td>
                         <td class="px-2 py-1">{{ item.amount }}</td>
-                        <td class="px-2 py-1" v-html="item.comment || 'Geen opmerkingen'"></td>
+                        <td class="px-2 py-1" v-html="item.comment || t('backoffice.order_details.no_comments')"></td>
                         <td class="px-2 py-1">€ {{ ((item.menu_item?.price ?? 0) * item.amount).toFixed(2) }}</td>
                     </tr>
                 </tbody>
             </table>
             <div class="mt-4 flex flex-wrap justify-end gap-6 rounded-lg bg-gray-200 p-4 text-base font-medium text-blue-900">
                 <div class="flex items-center gap-2">
-                    <span class="min-w-[140px]">Totaal (incl. btw):</span>
+                    <span class="min-w-[140px]">{{ t('backoffice.sales.total_incl_vat') }}</span>
                     <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">
                         €
                         {{
@@ -148,7 +158,7 @@
                     </span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="min-w-[120px]">Totaal btw (21%):</span>
+                    <span class="min-w-[120px]">{{ t('backoffice.sales.total_vat') }}</span>
                     <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">
                         €
                         {{
@@ -159,7 +169,7 @@
                     </span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="min-w-[140px]">Totaal (excl. btw):</span>
+                    <span class="min-w-[140px]">{{ t('backoffice.sales.total_excl_vat') }}</span>
                     <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">
                         €
                         {{

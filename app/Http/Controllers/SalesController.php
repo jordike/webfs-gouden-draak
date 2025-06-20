@@ -33,7 +33,7 @@ class SalesController extends Controller
         $result = $writer->write($qrCode);
         $qrCodeDataUrl = $result->getDataUri();
 
-        $pdf->view('pdf', [
+        $pdf->view('pdf/bill', [
             'order' => $order,
             'qrCode' => $qrCodeDataUrl
         ]);
