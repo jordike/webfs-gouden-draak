@@ -179,11 +179,11 @@
             "unknown": "Onbekend",
             "dash": "—",
             "labels": {
-                "bad": "Slecht",
-                "average": "Matig",
-                "good": "Goed",
-                "very_good": "Erg goed",
-                "excellent": "Uitstekend"
+                "slecht": "Slecht",
+                "matig": "Matig",
+                "goed": "Goed",
+                "erg_goed": "Erg goed",
+                "uitstekend": "Uitstekend"
             },
             "thank_you_title": "Bedankt voor uw review!",
             "thank_you_message": "Uw feedback is succesvol ontvangen.",

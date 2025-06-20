@@ -258,7 +258,7 @@
                                 {{ t('backoffice.pages.tables.cancel') }}
                             </button>
                             <button type="submit" class="w-full rounded bg-blue-600 px-4 py-2 font-semibold text-white shadow hover:bg-blue-700">
-                                {{ isEdit ? t('backoffice.pages.tables.save_changes') : t('backoffice.pages.tables.create') }}
+                                {{ isEdit ? t('backoffice.pages.tables.save') : t('backoffice.pages.tables.add') }}
                             </button>
                         </div>
                     </form>

@@ -103,7 +103,7 @@
     <BackOfficeLayout>
         <div class="min-h-screen bg-gray-50 p-6">
             <div class="mb-8 flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-gray-800">{{ t('backoffice.pages.menu.title') }}</h1>
+                <h1 class="text-2xl font-bold text-gray-800">{{ t('backoffice.menu.title') }}</h1>
 
                 <button
                     class="flex items-center gap-2 rounded bg-green-600 px-5 py-2 font-semibold text-white shadow transition hover:bg-green-700"
@@ -112,7 +112,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
-                    {{ t('backoffice.pages.menu.new_item') }}
+                    {{ t('backoffice.menu.new_item') }}
                 </button>
             </div>
 
@@ -121,7 +121,7 @@
             </div>
 
             <div v-if="filteredCategories.length === 0" class="mt-16 text-center text-gray-500">
-                {{ t('backoffice.pages.menu.none_found') }}
+                {{ t('backoffice.menu.none_found') }}
             </div>
         </div>
 
