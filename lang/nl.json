@@ -31,6 +31,9 @@
             "with_rice": "Met witte rijst. (Nasi of bami voor meerprijs mogelijk.)",
             "price": "Prijs: €21,00"
         },
+        "menu": {
+            "download_current_menu": "Download actuale menukaart"
+        },
         "news": {
             "message": "Door de Corona crisis is De Gouden Draak op het moment slechts beperkt open.<br />Het restaurant-gedeelte is gesloten. U kan uw favoriete gerechten nog wel afhalen."
         }
