@@ -1,0 +1,210 @@
+{
+    "restaurant_name": "De Gouden Draak",
+    "main": {
+        "header": {
+            "title": "Chinese Indonesian Specialties",
+            "marquee": "Welcome to De Gouden Draak. Click this text to see this week's offers!"
+        },
+        "navbar": {
+            "menu_card": "Menu",
+            "news": "News",
+            "contact": "Contact",
+            "go_to_contact": "Go to contact"
+        },
+        "contact": {
+            "instructions": "De Gouden Draak is easy to find, close to the city center, a 5-minute walk behind the central station.",
+            "address": "Onderwijsboulevard 215, room OG112<br />5223 DE 's-Hertogenbosch"
+        },
+        "home": {
+            "intro": "For years, De Gouden Draak has been known for the best takeaway dishes in 's-Hertogenbosch. <br />We are happy to treat you to authentic dishes from the Cantonese kitchen.",
+            "student_offer_title": "Special Student Offer",
+            "student_offer_subtitle": "Chinese Rice Table (2 persons)",
+            "student_offer_instruction": "Choose 3 of our dishes below:",
+            "dishes": {
+                "koe_loe_yuk": "Koe Loe Yuk",
+                "foe_yong_hai": "Foe Yong Hai",
+                "tjap_tjoy": "Tjap Tjoy",
+                "garnalen_knoflook": "Shrimp with Fried Garlic",
+                "babi_pangang": "Babi Pangang",
+                "kipfilet_bonensaus": "Chicken Fillet in Black Bean Sauce"
+            },
+            "with_rice": "With white rice. (Fried rice or noodles available for an extra charge.)",
+            "price": "Price: €21.00"
+        },
+        "news": {
+            "message": "Due to the Corona crisis, De Gouden Draak is currently only partially open.<br />The restaurant area is closed. You can still pick up your favorite dishes."
+        }
+    },
+    "backoffice": {
+        "header": {
+            "kassa": "Cash Register",
+            "menu": "Menu",
+            "sales_overview": "Sales Overview",
+            "reviews": "Reviews",
+            "daily_overview": "Daily Overview",
+            "tables": "Tables",
+            "logout": "Logout",
+            "title": "Gouden Draak BackOffice"
+        },
+        "menu": {
+            "new_item": "New Menu Item",
+            "edit_item": "Edit Menu Item",
+            "name": "Name",
+            "description": "Description",
+            "price": "Price (€)",
+            "category": "Category",
+            "new_category": "New category...",
+            "create": "Create",
+            "cancel": "Cancel",
+            "save": "Save",
+            "actions": "Actions",
+            "edit": "Edit",
+            "delete": "Delete",
+            "items_in_category": "{count} dishes",
+            "no_items": "No items in this category.",
+            "title": "Menu Management",
+            "none_found": "No items found matching your filter."
+        },
+        "orders": {
+            "add": "Add",
+            "increase": "Increase quantity",
+            "decrease": "Decrease quantity",
+            "remove": "Remove item",
+            "comment_placeholder": "Add comment...",
+            "order_id": "Order ID",
+            "dish_name": "Dish Name",
+            "menu": "Menu",
+            "search_placeholder": "Search by name, description, category or ID...",
+            "clear_search": "Clear search",
+            "none_found": "No results found.",
+            "order": "Order",
+            "no_items": "No items added yet.",
+            "total": "Total:",
+            "pay": "Pay"
+        },
+        "sales": {
+            "order": "Order",
+            "date": "Date",
+            "total": "Total",
+            "show_details": "Show details",
+            "hide_details": "Hide details",
+            "download_pdf": "Download pdf",
+            "total_incl_vat": "Total (incl. VAT):",
+            "total_vat": "Total VAT (21%):",
+            "total_excl_vat": "Total (excl. VAT):",
+            "filters": {
+                "order_id_or_dish": "Order ID or Dish Name",
+                "start_date": "Start date",
+                "end_date": "End date",
+                "clear_filters": "Clear filters"
+            },
+            "title": "Sales Overview",
+            "none_found": "No sales found."
+        },
+        "order_details": {
+            "split_bill": "Split Bill",
+            "cancel_split": "Cancel Split",
+            "number_of_parts": "Number of parts (max 8):",
+            "save_split": "Save Split",
+            "part": "Part {number}",
+            "max": "max: {amount}",
+            "no_comments": "No comments",
+            "subtotal": "Subtotal"
+        },
+        "pages": {
+            "login": {
+                "title": "Login",
+                "email": "Email",
+                "email_placeholder": "Enter your email address",
+                "password": "Password",
+                "password_placeholder": "Enter your password",
+                "button": "Login"
+            },
+            "tables": {
+                "title": "Tables",
+                "new_table": "New Table",
+                "table": "Table",
+                "num_customers": "Number of customers",
+                "deluxe_menu": "Deluxe menu",
+                "actions": "Actions",
+                "edit": "Edit",
+                "delete": "Delete",
+                "not_found": "No tables found.",
+                "add": "Add",
+                "save": "Save",
+                "cancel": "Cancel",
+                "edit_table": "Edit Table",
+                "add_table": "Add New Table",
+                "customers": "Customers (max 8)",
+                "customer_name_placeholder": "Customer name {number}",
+                "customer_age_placeholder": "Age",
+                "yes": "Yes",
+                "no": "No",
+                "delete_confirm": "Are you sure you want to delete this table?",
+                "close": "Close"
+            },
+            "sales": {
+                "title": "Sales Overview",
+                "none_found": "No sales found."
+            },
+            "daily_overview": {
+                "title": "Daily Overviews",
+                "date": "Date",
+                "download": "Download",
+                "download_excel": "Download Excel",
+                "none_found": "No overviews found."
+            },
+            "orders": {
+                "menu": "Menu",
+                "search_placeholder": "Search by name, description, category or ID...",
+                "clear_search": "Clear search",
+                "none_found": "No results found.",
+                "order": "Order",
+                "no_items": "No items added yet.",
+                "total": "Total:",
+                "pay": "Pay"
+            }
+        },
+        "reviews": {
+            "title": "Reviews",
+            "none_found": "No reviews yet.",
+            "name": "Name",
+            "date": "Date",
+            "rating": "Rating",
+            "atmosphere": "Atmosphere",
+            "service": "Service",
+            "favorite_food": "Favorite Dish",
+            "suggestions": "Suggestions",
+            "anonymous": "Anonymous",
+            "unknown": "Unknown",
+            "dash": "—",
+            "labels": {
+                "slecht": "Bad",
+                "matig": "Moderate",
+                "goed": "Good",
+                "erg_goed": "Very Good",
+                "uitstekend": "Excellent"
+            },
+            "thank_you_title": "Thank you for your review!",
+            "thank_you_message": "Your feedback has been received successfully.",
+            "leave_review": "Leave your review 🎉",
+            "form": {
+                "name": "Name",
+                "name_optional": "(optional)",
+                "name_placeholder": "Your name",
+                "rating": "How many stars do you give us?",
+                "atmosphere": "How did you find the atmosphere?",
+                "service": "How was the service?",
+                "favorite_food": "What was your favorite dish?",
+                "favorite_food_optional": "(optional)",
+                "favorite_food_placeholder": "E.g. Stew, Mussels, ...",
+                "improvement_suggestions": "Do you have any suggestions or improvements?",
+                "improvement_suggestions_optional": "(optional)",
+                "improvement_suggestions_placeholder": "Leave your suggestions or improvements here...",
+                "submit": "Submit review",
+                "stars_aria": "Give {count} stars",
+                "atmosphere_aria": "Atmosphere: {count}"
+            }
+        }
+    }
+}

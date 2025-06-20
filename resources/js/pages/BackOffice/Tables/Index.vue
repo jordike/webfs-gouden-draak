@@ -152,7 +152,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="font-semibold text-blue-700">{{ (table.customers ?? []).length }}</span>
-                                <span class="text-gray-500">/ 8</span>
+                                <span class="text-gray-500"> / 8</span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span

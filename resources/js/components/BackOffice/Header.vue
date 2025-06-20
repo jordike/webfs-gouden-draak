@@ -36,6 +36,27 @@
             </Link>
         </nav>
 
+        <div class="ml-8 flex items-center gap-2">
+            <button
+                :class="[
+                    'rounded px-3 py-1 font-medium transition-colors',
+                    $i18n.locale === 'nl' ? 'bg-[#bfa14a] text-white' : 'bg-transparent text-[#7c5c13] hover:bg-[#bfa14a] hover:text-white',
+                ]"
+                @click="$i18n.locale = 'nl'"
+            >
+                NL
+            </button>
+            <button
+                :class="[
+                    'rounded px-3 py-1 font-medium transition-colors',
+                    $i18n.locale === 'en' ? 'bg-[#bfa14a] text-white' : 'bg-transparent text-[#7c5c13] hover:bg-[#bfa14a] hover:text-white',
+                ]"
+                @click="$i18n.locale = 'en'"
+            >
+                EN
+            </button>
+        </div>
+
         <div class="ml-8">
             <Link
                 href="/logout"
