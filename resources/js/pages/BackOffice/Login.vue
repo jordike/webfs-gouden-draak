@@ -1,5 +1,8 @@
 <script lang="ts" setup>
     import { defineProps } from 'vue';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 
     defineProps<{
         csrf: string;
@@ -24,28 +27,28 @@
                 <img src="/assets/img/dragon-large.png" alt="Logo" class="h-16 w-auto" />
             </div>
 
-            <h2 class="mb-6 text-center text-2xl font-bold text-gray-800">Login</h2>
+            <h2 class="mb-6 text-center text-2xl font-bold text-gray-800">{{ t('backoffice.pages.login.title') }}</h2>
 
             <div class="mb-4">
-                <label class="mb-2 block text-gray-700" for="email">Email</label>
+                <label class="mb-2 block text-gray-700" for="email">{{ t('backoffice.pages.login.email') }}</label>
                 <input
                     id="email"
                     type="email"
                     name="email"
                     class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-                    placeholder="Enter your email"
+                    :placeholder="t('backoffice.pages.login.email_placeholder')"
                     required
                 />
             </div>
 
             <div class="mb-6">
-                <label class="mb-2 block text-gray-700" for="password">Password</label>
+                <label class="mb-2 block text-gray-700" for="password">{{ t('backoffice.pages.login.password') }}</label>
                 <input
                     id="password"
                     type="password"
                     name="password"
                     class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-                    placeholder="Enter your password"
+                    :placeholder="t('backoffice.pages.login.password_placeholder')"
                     required
                 />
             </div>
@@ -54,7 +57,7 @@
                 type="submit"
                 class="w-full rounded-lg bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 py-2 font-semibold text-white shadow-md transition-colors hover:from-yellow-500 hover:to-yellow-700"
             >
-                Login
+                {{ t('backoffice.pages.login.button') }}
             </button>
         </form>
     </div>

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
     import BackOfficeLayout from '@/layouts/BackOfficeLayout.vue';
     import { reactive, ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
+    const { t } = useI18n();
 
     const props = defineProps<{
         tables: Array<{
@@ -115,7 +117,7 @@
     <BackOfficeLayout>
         <div class="min-h-screen bg-gray-50 p-6">
             <div class="mb-8 flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-gray-800">Tafels</h1>
+                <h1 class="text-2xl font-bold text-gray-800">{{ t('backoffice.pages.tables.title') }}</h1>
                 <button
                     class="flex items-center gap-2 rounded bg-blue-600 px-5 py-2 font-semibold text-white shadow transition hover:bg-blue-700"
                     @click="openAddModal"
@@ -123,7 +125,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
-                    Nieuwe tafel
+                    {{ t('backoffice.pages.tables.new_table') }}
                 </button>
             </div>
 
@@ -132,14 +134,22 @@
                     <thead class="bg-gray-100">
                         <tr>
                             <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">#</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">Aantal klanten</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">Deluxe menu</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">Acties</th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">
+                                {{ t('backoffice.pages.tables.num_customers') }}
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">
+                                {{ t('backoffice.pages.tables.deluxe_menu') }}
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase">
+                                {{ t('backoffice.pages.tables.actions') }}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="table in props.tables" :key="table.id" class="transition hover:bg-blue-50">
-                            <td class="px-6 py-4 font-medium whitespace-nowrap text-gray-900">Tafel {{ table.id }}</td>
+                            <td class="px-6 py-4 font-medium whitespace-nowrap text-gray-900">
+                                {{ t('backoffice.pages.tables.table') }} {{ table.id }}
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="font-semibold text-blue-700">{{ (table.customers ?? []).length }}</span>
                                 <span class="text-gray-500">/ 8</span>
@@ -162,7 +172,7 @@
                                     <svg v-else class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
-                                    {{ table.use_deluxe_menu ? 'Ja' : 'Nee' }}
+                                    {{ table.use_deluxe_menu ? t('backoffice.pages.tables.yes') : t('backoffice.pages.tables.no') }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -170,18 +180,18 @@
                                     class="mr-2 rounded bg-yellow-400 px-3 py-1 text-sm font-semibold text-white shadow hover:bg-yellow-500"
                                     @click="openEditModal(table)"
                                 >
-                                    Bewerken
+                                    {{ t('backoffice.pages.tables.edit') }}
                                 </button>
                                 <button
                                     class="rounded bg-red-500 px-3 py-1 text-sm font-semibold text-white shadow hover:bg-red-600"
                                     @click="deleteTable(table.id)"
                                 >
-                                    Verwijderen
+                                    {{ t('backoffice.pages.tables.delete') }}
                                 </button>
                             </td>
                         </tr>
                         <tr v-if="props.tables.length === 0">
-                            <td colspan="4" class="py-10 text-center text-lg text-gray-400">Geen tafels gevonden.</td>
+                            <td colspan="4" class="py-10 text-center text-lg text-gray-400">{{ t('backoffice.pages.tables.not_found') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -190,27 +200,35 @@
             <!-- Modal -->
             <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" @mousedown.self="closeModal">
                 <div class="relative w-full max-w-lg rounded-lg bg-white p-8 shadow-lg">
-                    <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" @click="closeModal" title="Sluiten">
+                    <button
+                        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                        @click="closeModal"
+                        :title="t('backoffice.pages.tables.close')"
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                     <h2 class="mb-6 text-2xl font-bold text-gray-800">
-                        {{ isEdit ? 'Tafel bewerken' : 'Nieuwe tafel toevoegen' }}
+                        {{ isEdit ? t('backoffice.pages.tables.edit_table') : t('backoffice.pages.tables.add_table') }}
                     </h2>
                     <form @submit.prevent="submitModal">
-                        <label for="deluxe-menu-yes" class="mb-2 block font-semibold text-gray-700">Deluxe menu</label>
+                        <label for="deluxe-menu-yes" class="mb-2 block font-semibold text-gray-700">{{
+                            t('backoffice.pages.tables.deluxe_menu')
+                        }}</label>
                         <div class="mb-3 flex items-center gap-4">
                             <label class="inline-flex items-center">
                                 <input id="deluxe-menu-yes" type="radio" v-model="modalForm.use_deluxe_menu" :value="true" class="form-radio" />
-                                <span class="ml-2">Ja</span>
+                                <span class="ml-2">{{ t('backoffice.pages.tables.yes') }}</span>
                             </label>
                             <label class="inline-flex items-center">
                                 <input id="deluxe-menu-no" type="radio" v-model="modalForm.use_deluxe_menu" :value="false" class="form-radio" />
-                                <span class="ml-2">Nee</span>
+                                <span class="ml-2">{{ t('backoffice.pages.tables.no') }}</span>
                             </label>
                         </div>
-                        <label for="customer-name-0" class="mb-2 block font-semibold text-gray-700">Klanten (max 8)</label>
+                        <label for="customer-name-0" class="mb-2 block font-semibold text-gray-700">{{
+                            t('backoffice.pages.tables.customers')
+                        }}</label>
                         <div class="grid grid-cols-1 gap-3">
                             <div v-for="(customer, idx) in modalForm.customers" :key="idx" class="flex items-center gap-2">
                                 <input
@@ -218,7 +236,7 @@
                                     v-model="customer.name"
                                     type="text"
                                     class="w-1/2 rounded border px-3 py-1"
-                                    :placeholder="`Naam klant ${idx + 1}`"
+                                    :placeholder="t('backoffice.pages.tables.customer_name_placeholder', { number: idx + 1 })"
                                     maxlength="255"
                                 />
                                 <input
@@ -227,20 +245,20 @@
                                     type="number"
                                     min="0"
                                     class="w-1/4 rounded border px-3 py-1"
-                                    placeholder="Leeftijd"
+                                    :placeholder="t('backoffice.pages.tables.customer_age_placeholder')"
                                 />
                             </div>
                         </div>
-                        <div class="mt-8 flex justify-end gap-3">
+                        <div class="mt-8 flex justify-end gap-4">
                             <button
                                 type="button"
-                                class="rounded bg-gray-200 px-5 py-2 font-semibold text-gray-700 hover:bg-gray-300"
+                                class="w-full rounded bg-gray-200 px-4 py-2 text-gray-700 shadow hover:bg-gray-300"
                                 @click="closeModal"
                             >
-                                Annuleren
+                                {{ t('backoffice.pages.tables.cancel') }}
                             </button>
-                            <button type="submit" class="rounded bg-blue-600 px-5 py-2 font-semibold text-white shadow hover:bg-blue-700">
-                                {{ isEdit ? 'Opslaan' : 'Toevoegen' }}
+                            <button type="submit" class="w-full rounded bg-blue-600 px-4 py-2 font-semibold text-white shadow hover:bg-blue-700">
+                                {{ isEdit ? t('backoffice.pages.tables.save_changes') : t('backoffice.pages.tables.create') }}
                             </button>
                         </div>
                     </form>
@@ -249,3 +267,7 @@
         </div>
     </BackOfficeLayout>
 </template>
+
+<style scoped>
+    /* Add any component-specific styles here */
+</style>

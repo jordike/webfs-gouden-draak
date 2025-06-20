@@ -2,6 +2,8 @@
     import BackOfficeLayout from '@/layouts/BackOfficeLayout.vue';
     import { usePage } from '@inertiajs/vue3';
     import { computed } from 'vue';
+    import { useI18n } from 'vue-i18n';
+    const { t } = useI18n();
 
     interface Review {
         id: number;
@@ -47,19 +49,19 @@
 <template>
     <BackOfficeLayout>
         <div class="p-[20px]">
-            <h1 class="mb-6 text-2xl font-bold text-gray-800">Reviews</h1>
-            <div v-if="reviews.length === 0" class="text-gray-500">Nog geen reviews.</div>
+            <h1 class="mb-6 text-2xl font-bold text-gray-800">{{ t('reviews.title') }}</h1>
+            <div v-if="reviews.length === 0" class="text-gray-500">{{ t('reviews.none_found') }}</div>
             <div v-else class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 rounded-lg bg-white shadow">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Naam</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Datum</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Beoordeling</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Sfeer</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Service</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Favoriet gerecht</th>
-                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">Suggesties</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.name') }}</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.date') }}</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.rating') }}</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.atmosphere') }}</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.service') }}</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.favorite_food') }}</th>
+                            <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase">{{ t('reviews.suggestions') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -72,7 +74,7 @@
                                         <span v-if="review.name">{{ review.name.charAt(0).toUpperCase() }}</span>
                                         <span v-else>A</span>
                                     </div>
-                                    <span class="font-medium">{{ review.name || 'Anoniem' }}</span>
+                                    <span class="font-medium">{{ review.name || t('reviews.anonymous') }}</span>
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-xs whitespace-nowrap text-gray-500">{{ formatDate(review.created_at) }}</td>
@@ -105,9 +107,11 @@
                                     :class="atmosphereIcons[review.atmosphere_rating - 1].color + ' text-xl'"
                                 >
                                     {{ atmosphereIcons[review.atmosphere_rating - 1].icon }}
-                                    <span class="ml-1 text-xs text-gray-500">{{ atmosphereIcons[review.atmosphere_rating - 1].label }}</span>
+                                    <span class="ml-1 text-xs text-gray-500">{{
+                                        t('reviews.labels.' + atmosphereIcons[review.atmosphere_rating - 1].label.toLowerCase().replace(' ', '_'))
+                                    }}</span>
                                 </span>
-                                <span v-else>Onbekend</span>
+                                <span v-else>{{ t('reviews.unknown') }}</span>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap">
                                 <span
@@ -115,12 +119,14 @@
                                     :class="serviceIcons[review.service_rating - 1].color + ' text-xl'"
                                 >
                                     {{ serviceIcons[review.service_rating - 1].icon }}
-                                    <span class="ml-1 text-xs text-gray-500">{{ serviceIcons[review.service_rating - 1].label }}</span>
+                                    <span class="ml-1 text-xs text-gray-500">{{
+                                        t('reviews.labels.' + serviceIcons[review.service_rating - 1].label.toLowerCase())
+                                    }}</span>
                                 </span>
-                                <span v-else>Onbekend</span>
+                                <span v-else>{{ t('reviews.unknown') }}</span>
                             </td>
-                            <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{ review.favorite_food || '—' }}</td>
-                            <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{ review.improvement_suggestions || '—' }}</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{ review.favorite_food || t('reviews.dash') }}</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{ review.improvement_suggestions || t('reviews.dash') }}</td>
                         </tr>
                     </tbody>
                 </table>

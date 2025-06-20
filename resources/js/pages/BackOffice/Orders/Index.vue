@@ -3,6 +3,9 @@
     import OrderList from '@/components/BackOffice/Orders/OrderList.vue';
     import BackOfficeLayout from '@/layouts/BackOfficeLayout.vue';
     import { computed, Ref, ref } from 'vue';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 
     const props = defineProps<{
         categories: Array<any>;
@@ -79,14 +82,14 @@
                 <section class="flex-1">
                     <div class="sticky top-0 z-20 border-b-1 border-gray-200 bg-gray-50 pt-2 pb-4">
                         <div class="mx-auto max-w-3xl">
-                            <h2 class="mb-6 text-2xl font-bold text-green-700">Menu</h2>
+                            <h2 class="mb-6 text-2xl font-bold text-green-700">{{ t('backoffice.pages.orders.menu') }}</h2>
 
                             <div class="mb-4 flex items-center gap-3">
                                 <div class="relative w-full">
                                     <input
                                         v-model="filter"
                                         type="text"
-                                        placeholder="Zoek op naam, omschrijving, categorie of ID..."
+                                        :placeholder="t('backoffice.pages.orders.search_placeholder')"
                                         class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 pl-10 shadow-sm transition focus:border-green-500 focus:ring-2 focus:ring-green-200"
                                     />
                                     <svg
@@ -108,7 +111,7 @@
                                     v-if="filter"
                                     @click="filter = ''"
                                     class="ml-2 rounded-full bg-gray-200 p-2 text-gray-500 transition hover:bg-gray-300"
-                                    title="Wis zoekopdracht"
+                                    :title="t('backoffice.pages.orders.clear_search')"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -128,7 +131,7 @@
                                     d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12A9 9 0 113 12a9 9 0 0118 0z"
                                 />
                             </svg>
-                            Geen resultaten gevonden.
+                            {{ t('backoffice.pages.orders.none_found') }}
                         </div>
 
                         <MenuCategoryList :categories="filteredCategories" @add-item="addOrderItem" />
@@ -137,7 +140,7 @@
 
                 <section class="flex-1 border-l-1 border-gray-200 pl-6 lg:max-w-md">
                     <div class="sticky top-8">
-                        <h2 class="mb-6 text-2xl font-bold text-green-700">Bestelling</h2>
+                        <h2 class="mb-6 text-2xl font-bold text-green-700">{{ t('backoffice.pages.orders.order') }}</h2>
 
                         <form class="flex min-h-[400px] flex-col" style="height: 500px; max-height: 70vh" method="POST" action="/backoffice/orders">
                             <input type="hidden" name="_token" :value="csrfToken" />
@@ -146,7 +149,7 @@
                                 <svg class="mb-2 h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
                                 </svg>
-                                <span class="text-lg">Nog geen items toegevoegd.</span>
+                                <span class="text-lg">{{ t('backoffice.pages.orders.no_items') }}</span>
                             </div>
 
                             <OrderList
@@ -159,7 +162,7 @@
 
                             <div class="mt-auto flex items-center justify-between rounded-b-xl bg-gray-50 px-6 py-4 shadow-inner">
                                 <div class="text-lg font-semibold text-gray-700">
-                                    Totaal:
+                                    {{ t('backoffice.pages.orders.total') }}
                                     <span class="text-green-700">
                                         €{{ orderItems.reduce((sum, item) => sum + item.price * (item.amount || 1), 0).toFixed(2) }}
                                     </span>
@@ -169,7 +172,7 @@
                                     class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 px-6 py-2 font-bold text-white shadow transition hover:from-green-600 hover:to-green-700"
                                     type="submit"
                                 >
-                                    Betalen
+                                    {{ t('backoffice.pages.orders.pay') }}
                                 </button>
                             </div>
                         </form>

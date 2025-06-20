@@ -5,6 +5,9 @@
     import BackOfficeLayout from '@/layouts/BackOfficeLayout.vue';
     import { usePage } from '@inertiajs/vue3';
     import { computed, reactive, ref, watch } from 'vue';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 
     const orders = computed(() => usePage().props.orders as any[]);
 
@@ -79,7 +82,7 @@
     <BackOfficeLayout>
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-white p-6 md:p-10">
             <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <h1 class="text-3xl font-extrabold tracking-tight text-blue-900">Verkoopoverzicht</h1>
+                <h1 class="text-3xl font-extrabold tracking-tight text-blue-900">{{ t('backoffice.pages.sales.title') }}</h1>
 
                 <OrderFilters v-model:filterText="filterText" v-model:filterStartDate="filterStartDate" v-model:filterEndDate="filterEndDate" />
             </div>
@@ -87,7 +90,7 @@
             <OrderTotals :totalPrice="totalPrice" :totalVAT="totalVAT" :totalExclVAT="totalExclVAT" />
 
             <div v-if="filteredOrders.length === 0" class="rounded-lg bg-gray-100 p-6 text-center text-gray-800 shadow-md">
-                <p class="font-medium">Geen verkopen gevonden.</p>
+                <p class="font-medium">{{ t('backoffice.pages.sales.none_found') }}</p>
             </div>
 
             <OrderTable v-else :filteredOrders="filteredOrders" :collapsedOrders="collapsedOrders" @toggleCollapse="toggleCollapse" />
