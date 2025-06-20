@@ -15,6 +15,7 @@
             <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V7h2v2z" />
             </svg>
+
             {{ category.name }}
         </h2>
 

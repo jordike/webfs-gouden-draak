@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { ref } from 'vue';
     import { useI18n } from 'vue-i18n';
+
     const { t } = useI18n();
 
     const props = defineProps<{
@@ -39,23 +40,23 @@
                 <h1 class="mb-4 text-2xl font-bold text-green-700">{{ t('backoffice.reviews.thank_you_title') }}</h1>
                 <p class="text-gray-700">{{ t('backoffice.reviews.thank_you_message') }}</p>
             </div>
+
             <div v-else>
                 <h1
                     class="mb-6 bg-gradient-to-r from-yellow-700 via-yellow-500 to-yellow-400 bg-clip-text text-center text-3xl font-extrabold text-transparent drop-shadow-lg"
                 >
                     {{ t('backoffice.reviews.leave_review') }}
                 </h1>
+
                 <form action="#" method="POST" class="space-y-8">
                     <input type="hidden" name="_token" :value="csrfToken" />
                     <input type="hidden" name="order_id" :value="order_id" />
 
-                    <!-- Naam -->
                     <div>
-                        <label for="name" class="mb-1 block font-semibold text-yellow-900"
-                            >{{ t('backoffice.reviews.form.name') }}
-                            <span class="font-normal text-yellow-400">{{ t('backoffice.reviews.form.name_optional') }}</span
-                            >:</label
-                        >
+                        <label for="name" class="mb-1 block font-semibold text-yellow-900">
+                            {{ t('backoffice.reviews.form.name') }}
+                            <span class="font-normal text-yellow-400">{{ t('backoffice.reviews.form.name_optional') }} </span>:
+                        </label>
                         <input
                             id="name"
                             name="name"
@@ -66,7 +67,6 @@
                         />
                     </div>
 
-                    <!-- Algemene beoordeling -->
                     <div>
                         <label class="mb-1 block font-semibold text-yellow-900" for="rating">{{ t('backoffice.reviews.form.rating') }}</label>
                         <input id="rating" type="hidden" name="rating" :value="form.rating" />
@@ -91,9 +91,10 @@
                         </div>
                     </div>
 
-                    <!-- Sfeer beoordeling -->
                     <div>
-                        <label class="mb-1 block font-semibold text-yellow-900">{{ t('backoffice.reviews.form.atmosphere') }}</label>
+                        <label class="mb-1 block font-semibold text-yellow-900" for="atmosphere_rating">
+                            {{ t('backoffice.reviews.form.atmosphere') }}
+                        </label>
                         <div class="flex justify-center gap-3">
                             <span
                                 v-for="(emoji, idx) in ['😞', '😐', '😊', '😁', '🤩']"
@@ -105,15 +106,18 @@
                                 }"
                                 @click="form.atmosphere_rating = idx + 1"
                                 :aria-label="t('backoffice.reviews.form.atmosphere_aria', { count: idx + 1 })"
-                                >{{ emoji }}</span
                             >
+                                {{ emoji }}
+                            </span>
                         </div>
-                        <input type="hidden" name="atmosphere_rating" :value="form.atmosphere_rating" />
+                        <input type="hidden" id="atmosphere_rating" name="atmosphere_rating" :value="form.atmosphere_rating" />
                     </div>
 
                     <!-- Service beoordeling -->
                     <div>
-                        <label class="mb-1 block font-semibold text-yellow-900">{{ t('backoffice.reviews.form.service') }}</label>
+                        <label class="mb-1 block font-semibold text-yellow-900">
+                            {{ t('backoffice.reviews.form.service') }}
+                        </label>
                         <div class="flex justify-center gap-4">
                             <label
                                 v-for="(option, idx) in [
@@ -143,11 +147,13 @@
 
                     <!-- Favoriet gerecht -->
                     <div>
-                        <label for="favorite_food" class="mb-1 block font-semibold text-yellow-900"
-                            >{{ t('backoffice.reviews.form.favorite_food') }}
-                            <span class="font-normal text-yellow-400">{{ t('backoffice.reviews.form.favorite_food_optional') }}</span
-                            >:</label
-                        >
+                        <label for="favorite_food" class="mb-1 block font-semibold text-yellow-900">
+                            {{ t('backoffice.reviews.form.favorite_food') }}
+                            <span class="font-normal text-yellow-400">
+                                {{ t('backoffice.reviews.form.favorite_food_optional') }}
+                            </span>
+                            :
+                        </label>
                         <input
                             id="favorite_food"
                             name="favorite_food"
@@ -158,13 +164,14 @@
                         />
                     </div>
 
-                    <!-- Review tekst -->
                     <div>
-                        <label for="improvement_suggestions" class="mb-1 block font-semibold text-yellow-900"
-                            >{{ t('backoffice.reviews.form.improvement_suggestions') }}
-                            <span class="font-normal text-yellow-400">{{ t('backoffice.reviews.form.improvement_suggestions_optional') }}</span
-                            >:</label
-                        >
+                        <label for="improvement_suggestions" class="mb-1 block font-semibold text-yellow-900">
+                            {{ t('backoffice.reviews.form.improvement_suggestions') }}
+                            <span class="font-normal text-yellow-400">
+                                {{ t('backoffice.reviews.form.improvement_suggestions_optional') }}
+                            </span>
+                            :
+                        </label>
                         <textarea
                             id="improvement_suggestions"
                             name="improvement_suggestions"

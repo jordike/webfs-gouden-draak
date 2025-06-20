@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="nl">
 
     <head>
         <meta charset="UTF-8">
+
         <title>Bestelling PDF</title>
+
         <style>
             @page {
                 size: 8.5cm 10cm;
@@ -117,6 +120,7 @@
 
         @if ($order->parts && $order->parts->count())
             <h2 style="margin-bottom: 6px; font-size: 15px; color: #333;">Rekening gesplitst in {{ $order->parts->count() }} delen:</h2>
+
             @foreach ($order->parts as $part)
                 @if ($part->items->count())
                     <div style="margin-bottom: 10px;">
@@ -130,21 +134,32 @@
                                     <th class="text-right" style="width: 20%;">Subtotaal</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @php $partTotal = 0; @endphp
+
                                 @foreach ($part->items as $item)
                                     @php
                                         $menuItem = $item->menuItem;
                                         $lineTotal = $menuItem->price * $item->amount;
                                         $partTotal += $lineTotal;
                                     @endphp
+
                                     <tr>
-                                        <td>{!! $menuItem->name !!}</td>
+                                        <td>
+                                            <div>{!! $menuItem->name !!}</div>
+
+                                            @if ($menuItem->description)
+                                                <div class="desc">{!! $menuItem->description !!}</div>
+                                            @endif
+                                        </td>
+
                                         <td class="text-right">{{ $item->amount }}</td>
                                         <td class="text-right">&euro;{{ number_format($menuItem->price, 2) }}</td>
                                         <td class="text-right">&euro;{{ number_format($lineTotal, 2) }}</td>
                                     </tr>
                                 @endforeach
+
                                 <tr class="total-row">
                                     <td colspan="3">Totaal deel {{ $part->part_number }}</td>
                                     <td class="text-right">&euro;{{ number_format($partTotal, 2) }}</td>
@@ -164,6 +179,7 @@
                         <th class="text-right" style="width: 20%;">Subtotaal</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @foreach ($order->items as $item)
                         @php

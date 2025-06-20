@@ -6,6 +6,7 @@
 
     defineProps<{
         csrf: string;
+        errors: Record<string, string[]>;
     }>();
 </script>
 
@@ -14,12 +15,9 @@
         <form class="max-w-sm rounded-lg bg-white p-8 shadow-md" method="POST" action="/login">
             <input type="hidden" name="_token" :value="csrf" />
 
-            <div
-                v-if="$page.props.errors && Object.keys($page.props.errors).length"
-                class="mb-4 w-full max-w-sm rounded bg-red-100 p-4 text-red-700 shadow"
-            >
+            <div v-if="errors && Object.keys(errors).length" class="mb-4 w-full max-w-sm rounded bg-red-100 p-4 text-red-700 shadow">
                 <ul>
-                    <li v-for="(error, key) in $page.props.errors" :key="key">{{ error }}</li>
+                    <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
                 </ul>
             </div>
 
@@ -27,7 +25,9 @@
                 <img src="/assets/img/dragon-large.png" alt="Logo" class="h-16 w-auto" />
             </div>
 
-            <h2 class="mb-6 text-center text-2xl font-bold text-gray-800">{{ t('backoffice.pages.login.title') }}</h2>
+            <h2 class="mb-6 text-center text-2xl font-bold text-gray-800">
+                {{ t('backoffice.pages.login.title') }}
+            </h2>
 
             <div class="mb-4">
                 <label class="mb-2 block text-gray-700" for="email">{{ t('backoffice.pages.login.email') }}</label>

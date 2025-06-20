@@ -2,7 +2,7 @@
     "restaurant_name": "De Gouden Draak",
     "main": {
         "header": {
-            "title": "Chinese Indonesian Specialties",
+            "title": "Chinese Indian Specialties",
             "marquee": "Welcome to De Gouden Draak. Click this text to see this week's offers!"
         },
         "navbar": {
@@ -66,7 +66,8 @@
             "items_in_category": "{count} dishes",
             "no_items": "No items in this category.",
             "title": "Menu Management",
-            "none_found": "No items found matching your filter."
+            "none_found": "No items found matching your filter.",
+            "filter_placeholder": "Filter by name, description or category..."
         },
         "orders": {
             "add": "Add",

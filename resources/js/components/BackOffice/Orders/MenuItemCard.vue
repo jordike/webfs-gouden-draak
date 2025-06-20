@@ -16,9 +16,11 @@
                     #{{ item.id }}
                 </span>
             </div>
+
             <div class="flex items-center gap-2 font-semibold text-gray-800">
                 <span v-html="item.name"></span>
             </div>
+
             <div v-if="item.description" class="mt-1 text-sm text-gray-500" v-html="item.description"></div>
             <div class="mt-1 font-bold text-green-600">€{{ item.price }}</div>
         </div>

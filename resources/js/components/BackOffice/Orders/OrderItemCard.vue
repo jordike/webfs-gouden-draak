@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { defineEmits, defineProps, ref, watch } from 'vue';
-
     import { useI18n } from 'vue-i18n';
+
     const { t } = useI18n();
 
     const props = defineProps<{
@@ -10,11 +10,8 @@
     }>();
 
     const emit = defineEmits(['increase', 'decrease', 'remove', 'update:comment']);
-
-    // Local comment state, default to orderItem.comment if present
     const comment = ref(props.orderItem.comment || '');
 
-    // Emit comment changes to parent
     watch(comment, (val) => {
         emit('update:comment', { idx: props.idx, comment: val });
     });
@@ -32,11 +29,14 @@
                     #{{ orderItem.id }}
                 </span>
             </div>
+
             <div class="flex items-center gap-2 font-semibold text-gray-800">
                 <span v-html="orderItem.name"></span>
             </div>
+
             <div v-if="orderItem.description" class="mt-1 text-sm text-gray-500" v-html="orderItem.description"></div>
             <div class="mt-1 font-bold text-green-600">€{{ orderItem.price }}</div>
+
             <textarea
                 v-model="comment"
                 class="mt-2 w-full rounded border border-gray-200 px-2 py-1 text-sm text-gray-700 focus:ring-2 focus:ring-green-200 focus:outline-none"

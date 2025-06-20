@@ -3,6 +3,7 @@
     import { usePage } from '@inertiajs/vue3';
     import { computed } from 'vue';
     import { useI18n } from 'vue-i18n';
+
     const { t } = useI18n();
 
     interface Review {
@@ -21,6 +22,7 @@
 
     function formatDate(dateStr: string) {
         const date = new Date(dateStr);
+
         return date.toLocaleDateString('nl-NL', {
             year: 'numeric',
             month: 'short',
@@ -50,7 +52,9 @@
     <BackOfficeLayout>
         <div class="p-[20px]">
             <h1 class="mb-6 text-2xl font-bold text-gray-800">{{ t('backoffice.reviews.title') }}</h1>
+
             <div v-if="reviews.length === 0" class="text-gray-500">{{ t('backoffice.reviews.none_found') }}</div>
+
             <div v-else class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 rounded-lg bg-white shadow">
                     <thead class="bg-gray-50">
@@ -70,6 +74,7 @@
                             </th>
                         </tr>
                     </thead>
+
                     <tbody class="divide-y divide-gray-100">
                         <tr v-for="review in reviews" :key="review.id" class="transition hover:bg-gray-50">
                             <td class="px-4 py-3 whitespace-nowrap">
@@ -77,13 +82,19 @@
                                     <div
                                         class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-lg font-bold text-gray-600 shadow-inner"
                                     >
-                                        <span v-if="review.name">{{ review.name.charAt(0).toUpperCase() }}</span>
+                                        <span v-if="review.name">
+                                            {{ review.name.charAt(0).toUpperCase() }}
+                                        </span>
                                         <span v-else>A</span>
                                     </div>
-                                    <span class="font-medium">{{ review.name || t('backoffice.reviews.anonymous') }}</span>
+                                    <span class="font-medium">
+                                        {{ review.name || t('backoffice.reviews.anonymous') }}
+                                    </span>
                                 </div>
                             </td>
-                            <td class="px-4 py-3 text-xs whitespace-nowrap text-gray-500">{{ formatDate(review.created_at) }}</td>
+                            <td class="px-4 py-3 text-xs whitespace-nowrap text-gray-500">
+                                {{ formatDate(review.created_at) }}
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap">
                                 <div class="flex items-center gap-1">
                                     <span
@@ -91,8 +102,9 @@
                                         :key="star"
                                         class="text-xl"
                                         :class="star <= review.rating ? 'text-yellow-400' : 'text-gray-200'"
-                                        >★</span
                                     >
+                                        ★
+                                    </span>
                                     <span
                                         class="ml-2 rounded-full border px-2 py-0.5 text-xs font-semibold"
                                         :class="[
@@ -103,7 +115,7 @@
                                                   : 'border-red-200 bg-red-50 text-red-700',
                                         ]"
                                     >
-                                        {{ review.rating }}/5
+                                        {{ review.rating }} / 5
                                     </span>
                                 </div>
                             </td>
@@ -113,14 +125,18 @@
                                     :class="atmosphereIcons[review.atmosphere_rating - 1].color + ' text-xl'"
                                 >
                                     {{ atmosphereIcons[review.atmosphere_rating - 1].icon }}
-                                    <span class="ml-1 text-xs text-gray-500">{{
-                                        t(
-                                            'backoffice.reviews.labels.' +
-                                                atmosphereIcons[review.atmosphere_rating - 1].label.toLowerCase().replace(' ', '_'),
-                                        )
-                                    }}</span>
+                                    <span class="ml-1 text-xs text-gray-500">
+                                        {{
+                                            t(
+                                                'backoffice.reviews.labels.' +
+                                                    atmosphereIcons[review.atmosphere_rating - 1].label.toLowerCase().replace(' ', '_'),
+                                            )
+                                        }}
+                                    </span>
                                 </span>
-                                <span v-else>{{ t('backoffice.reviews.unknown') }}</span>
+                                <span v-else>
+                                    {{ t('backoffice.reviews.unknown') }}
+                                </span>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap">
                                 <span
@@ -128,13 +144,15 @@
                                     :class="serviceIcons[review.service_rating - 1].color + ' text-xl'"
                                 >
                                     {{ serviceIcons[review.service_rating - 1].icon }}
-                                    <span class="ml-1 text-xs text-gray-500">{{
-                                        t('backoffice.reviews.labels.' + serviceIcons[review.service_rating - 1].label.toLowerCase())
-                                    }}</span>
+                                    <span class="ml-1 text-xs text-gray-500">
+                                        {{ t('backoffice.reviews.labels.' + serviceIcons[review.service_rating - 1].label.toLowerCase()) }}
+                                    </span>
                                 </span>
                                 <span v-else>{{ t('backoffice.reviews.unknown') }}</span>
                             </td>
-                            <td class="px-4 py-3 whitespace-nowrap text-gray-700">{{ review.favorite_food || t('backoffice.reviews.dash') }}</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-gray-700">
+                                {{ review.favorite_food || t('backoffice.reviews.dash') }}
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap text-gray-700">
                                 {{ review.improvement_suggestions || t('backoffice.reviews.dash') }}
                             </td>

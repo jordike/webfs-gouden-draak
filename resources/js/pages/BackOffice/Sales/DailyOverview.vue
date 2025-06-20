@@ -14,6 +14,7 @@
 
     function formatDate(date: any) {
         if (!date) return '';
+
         return new Date(date).toLocaleDateString('nl-NL', {
             year: 'numeric',
             month: 'long',
@@ -39,6 +40,7 @@
                             </th>
                         </tr>
                     </thead>
+
                     <tbody class="divide-y divide-gray-100 bg-white">
                         <tr v-for="overview in dailyOverviews" :key="overview.date" class="transition hover:bg-blue-50">
                             <td class="px-6 py-4 font-medium whitespace-nowrap text-gray-900">{{ formatDate(overview.date) }}</td>
@@ -60,6 +62,7 @@
                                 </a>
                             </td>
                         </tr>
+
                         <tr v-if="!dailyOverviews.length">
                             <td colspan="2" class="py-10 text-center text-lg text-gray-400">
                                 {{ t('backoffice.pages.daily_overview.none_found') }}

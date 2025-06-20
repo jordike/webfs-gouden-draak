@@ -2,13 +2,14 @@
     import BackOfficeLayout from '@/layouts/BackOfficeLayout.vue';
     import { reactive, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
+
     const { t } = useI18n();
 
     const props = defineProps<{
         tables: Array<{
             id: number;
             use_deluxe_menu: boolean;
-            customers: Array<{ id: number; name: string; age: number | null }>;
+            customers: any;
         }>;
         csrfToken: string;
     }>();
@@ -26,7 +27,7 @@
         isEdit.value = false;
         modalTableId.value = null;
         modalForm.use_deluxe_menu = false;
-        modalForm.customers = Array.from({ length: 8 }, () => ({ name: '', age: '' }));
+        modalForm.customers = Array.from({ length: 8 }, () => ({ name: '', age: '' })) as any;
         showModal.value = true;
     }
 
@@ -34,6 +35,7 @@
         isEdit.value = true;
         modalTableId.value = table.id;
         modalForm.use_deluxe_menu = !!table.use_deluxe_menu;
+
         const customersArr = Array.isArray(table.customers) ? table.customers : [];
         modalForm.customers = Array.from({ length: 8 }, (_, i) => {
             const c = customersArr[i];
@@ -42,6 +44,7 @@
                 age: c && c.age !== null && c.age !== undefined ? c.age : null,
             };
         });
+
         showModal.value = true;
     }
 
@@ -54,13 +57,16 @@
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = isEdit.value ? `/backoffice/tables/${modalTableId.value}` : '/backoffice/tables';
+
         if (isEdit.value) {
             const method = document.createElement('input');
             method.type = 'hidden';
             method.name = '_method';
             method.value = 'PUT';
+
             form.appendChild(method);
         }
+
         const token = document.createElement('input');
         token.type = 'hidden';
         token.name = '_token';
@@ -95,20 +101,25 @@
 
     function deleteTable(id: number) {
         if (!confirm('Weet je zeker dat je deze tafel wilt verwijderen?')) return;
+
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = `/backoffice/tables/${id}`;
+
         const token = document.createElement('input');
         token.type = 'hidden';
         token.name = '_token';
         token.value = props.csrfToken;
         form.appendChild(token);
+
         const method = document.createElement('input');
         method.type = 'hidden';
         method.name = '_method';
         method.value = 'DELETE';
+
         form.appendChild(method);
         document.body.appendChild(form);
+
         form.submit();
     }
 </script>
@@ -117,7 +128,10 @@
     <BackOfficeLayout>
         <div class="min-h-screen bg-gray-50 p-6">
             <div class="mb-8 flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-gray-800">{{ t('backoffice.pages.tables.title') }}</h1>
+                <h1 class="text-2xl font-bold text-gray-800">
+                    {{ t('backoffice.pages.tables.title') }}
+                </h1>
+
                 <button
                     class="flex items-center gap-2 rounded bg-blue-600 px-5 py-2 font-semibold text-white shadow transition hover:bg-blue-700"
                     @click="openAddModal"
@@ -125,6 +139,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
+
                     {{ t('backoffice.pages.tables.new_table') }}
                 </button>
             </div>
@@ -145,6 +160,7 @@
                             </th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr v-for="table in props.tables" :key="table.id" class="transition hover:bg-blue-50">
                             <td class="px-6 py-4 font-medium whitespace-nowrap text-gray-900">
@@ -169,9 +185,11 @@
                                     >
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                     </svg>
+
                                     <svg v-else class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
+
                                     {{ table.use_deluxe_menu ? t('backoffice.pages.tables.yes') : t('backoffice.pages.tables.no') }}
                                 </span>
                             </td>
@@ -190,6 +208,7 @@
                                 </button>
                             </td>
                         </tr>
+
                         <tr v-if="props.tables.length === 0">
                             <td colspan="4" class="py-10 text-center text-lg text-gray-400">{{ t('backoffice.pages.tables.not_found') }}</td>
                         </tr>
@@ -209,9 +228,11 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
+
                     <h2 class="mb-6 text-2xl font-bold text-gray-800">
                         {{ isEdit ? t('backoffice.pages.tables.edit_table') : t('backoffice.pages.tables.add_table') }}
                     </h2>
+
                     <form @submit.prevent="submitModal">
                         <label for="deluxe-menu-yes" class="mb-2 block font-semibold text-gray-700">{{
                             t('backoffice.pages.tables.deluxe_menu')
@@ -226,6 +247,7 @@
                                 <span class="ml-2">{{ t('backoffice.pages.tables.no') }}</span>
                             </label>
                         </div>
+
                         <label for="customer-name-0" class="mb-2 block font-semibold text-gray-700">{{
                             t('backoffice.pages.tables.customers')
                         }}</label>
@@ -249,6 +271,7 @@
                                 />
                             </div>
                         </div>
+
                         <div class="mt-8 flex justify-end gap-4">
                             <button
                                 type="button"
@@ -267,7 +290,3 @@
         </div>
     </BackOfficeLayout>
 </template>
-
-<style scoped>
-    /* Add any component-specific styles here */
-</style>

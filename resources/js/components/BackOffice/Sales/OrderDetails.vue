@@ -15,6 +15,7 @@
 
     function setPartsCount(count: number) {
         partsCount.value = count;
+
         while (parts.value.length < count) parts.value.push([]);
         while (parts.value.length > count) parts.value.pop();
     }
@@ -23,7 +24,7 @@
         const totalOther = parts.value.reduce((sum, p, idx) => {
             if (idx === partIdx) return sum;
 
-            const found = p.find((x) => x.orderItemId === orderItemId);
+            const found: any = p.find((x: any) => x.orderItemId === orderItemId);
 
             return sum + (found ? found.amount : 0);
         }, 0);
@@ -33,8 +34,8 @@
 
         amount = Math.max(0, Math.min(amount, max));
 
-        const part = parts.value[partIdx];
-        const existing = part.find((x) => x.orderItemId === orderItemId);
+        const part: any = parts.value[partIdx];
+        const existing: any = part.find((x: any) => x.orderItemId === orderItemId);
 
         if (existing) {
             existing.amount = amount;
@@ -49,8 +50,8 @@
         await axios.post(`/backoffice/orders/${props.order.id}/parts`, { count: partsCount.value });
         const assignments = parts.value.slice(0, partsCount.value).flatMap((part, idx) =>
             part
-                .filter((x) => x.amount > 0)
-                .map((x) => ({
+                .filter((x: any) => x.amount > 0)
+                .map((x: any) => ({
                     order_item_id: x.orderItemId,
                     order_part_id: idx + 1,
                     amount: x.amount,
@@ -71,6 +72,7 @@
                 {{ showSplit ? t('backoffice.order_details.cancel_split') : t('backoffice.order_details.split_bill') }}
             </button>
         </div>
+
         <div v-if="showSplit">
             <div class="mb-4 flex items-center gap-2">
                 <label for="partsCount" class="font-semibold">{{ t('backoffice.order_details.number_of_parts') }}</label>
@@ -84,6 +86,7 @@
                     class="w-16 rounded border border-gray-300 px-2 py-1 text-center focus:ring-2 focus:ring-green-200 focus:outline-none"
                 />
             </div>
+
             <div class="mb-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
                 <div
                     v-for="(part, idx) in parts.slice(0, partsCount)"
@@ -91,6 +94,7 @@
                     class="rounded-lg border border-indigo-200 bg-indigo-50 p-2 shadow-sm"
                 >
                     <h3 class="mb-1 text-base font-bold text-indigo-800">{{ t('backoffice.order_details.part', { number: idx + 1 }) }}</h3>
+
                     <div class="space-y-1">
                         <div v-for="item in order.filteredItems" :key="item.id" class="flex items-center gap-2">
                             <label :for="`deel-${idx}-item-${item.id}`" class="flex-1 truncate"
@@ -102,22 +106,23 @@
                                 type="number"
                                 :max="item.amount"
                                 min="0"
-                                :value="part.find((x) => x.orderItemId === item.id)?.amount || 0"
-                                @input="assignToPart(idx, item.id, +$event.target.value)"
+                                :value="(part.find((x: any) => x.orderItemId === item.id) as any)?.amount || 0"
+                                @input="assignToPart(idx, item.id, +($event.target as any).value)"
                                 class="w-14 rounded border border-gray-300 px-1 py-0.5 text-center text-sm focus:ring-2 focus:ring-indigo-200 focus:outline-none"
                             />
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="mt-2 flex justify-end">
                 <button class="rounded bg-indigo-600 px-4 py-2 font-semibold text-white shadow hover:bg-indigo-700" @click="storeBillParts">
                     {{ t('backoffice.order_details.save_split') }}
                 </button>
             </div>
         </div>
+
         <div v-if="!showSplit">
-            <!-- Order details table and totals -->
             <table class="mb-2 w-full table-auto">
                 <thead>
                     <tr>
@@ -135,6 +140,7 @@
                         <th class="px-2 py-1 text-left">{{ t('backoffice.order_details.subtotal') }}</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr v-for="item in order.filteredItems" :key="item.id">
                         <td class="px-2 py-1" v-html="item.menu_item?.name ?? item.menu_item_id"></td>
@@ -145,6 +151,7 @@
                     </tr>
                 </tbody>
             </table>
+
             <div class="mt-4 flex flex-wrap justify-end gap-6 rounded-lg bg-gray-200 p-4 text-base font-medium text-blue-900">
                 <div class="flex items-center gap-2">
                     <span class="min-w-[140px]">{{ t('backoffice.sales.total_incl_vat') }}</span>
@@ -157,6 +164,7 @@
                         }}
                     </span>
                 </div>
+
                 <div class="flex items-center gap-2">
                     <span class="min-w-[120px]">{{ t('backoffice.sales.total_vat') }}</span>
                     <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">
@@ -168,6 +176,7 @@
                         }}
                     </span>
                 </div>
+
                 <div class="flex items-center gap-2">
                     <span class="min-w-[140px]">{{ t('backoffice.sales.total_excl_vat') }}</span>
                     <span class="rounded border border-green-200 bg-green-100 px-2 py-1 text-green-800 shadow-sm">

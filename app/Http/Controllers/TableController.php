@@ -21,14 +21,6 @@ class TableController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -40,7 +32,6 @@ class TableController extends Controller
             'customers.*.age' => 'nullable|integer|min:0',
         ]);
 
-        // Create the table
         $table = Table::create([
             'use_deluxe_menu' => $validated['use_deluxe_menu'],
         ]);
@@ -58,22 +49,6 @@ class TableController extends Controller
 
         return redirect()->route('backoffice.tables.index')
             ->with('success', 'Table created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

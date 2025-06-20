@@ -66,7 +66,8 @@
             "items_in_category": "{count} gerechten",
             "no_items": "Geen items in deze categorie.",
             "title": "Menu Beheer",
-            "none_found": "Geen items gevonden die overeenkomen met je filter."
+            "none_found": "Geen items gevonden die overeenkomen met je filter.",
+            "filter_placeholder": "Filteren op naam, omschrijving of categorie..."
         },
         "orders": {
             "add": "Toevoegen",

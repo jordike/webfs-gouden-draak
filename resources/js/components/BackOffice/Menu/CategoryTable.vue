@@ -23,6 +23,7 @@
     <div class="mb-10">
         <div class="mb-3 flex items-center">
             <h2 class="text-xl font-semibold text-gray-700">{{ category.name }}</h2>
+
             <span class="ml-3 rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-600">
                 {{ t('backoffice.menu.items_in_category', { count: category.items.length }) }}
             </span>
@@ -67,6 +68,7 @@
                                     </svg>
                                     {{ t('backoffice.menu.edit') }}
                                 </button>
+
                                 <form :action="`/backoffice/menu/${item.id}`" method="POST">
                                     <input type="hidden" name="_token" :value="csrfToken" />
                                     <input type="hidden" name="_method" value="DELETE" />
@@ -85,6 +87,7 @@
                                         >
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
+
                                         {{ t('backoffice.menu.delete') }}
                                     </button>
                                 </form>

@@ -19,11 +19,6 @@ class GenerateDailyOverview implements ShouldQueue
 {
     use Queueable, Dispatchable;
 
-    public function __construct()
-    {
-        //
-    }
-
     public function handle(): void
     {
         $today = Carbon::today();
@@ -59,13 +54,16 @@ class GenerateDailyOverview implements ShouldQueue
 
         foreach ($orders as $order) {
             $orderTotal = 0;
+
             foreach ($order->items as $item) {
                 $subtotal = $item->amount * $item->menuItem->price;
                 $orderTotal += $subtotal;
             }
             $firstItem = true;
+
             foreach ($order->items as $item) {
                 $row++;
+
                 $sheet->setCellValue('A' . $row, $firstItem ? $order->id : '');
                 $sheet->setCellValue('B' . $row, $firstItem ? $order->date_placed : '');
                 $sheet->setCellValue('C' . $row, $item->menuItem->name);
@@ -73,13 +71,15 @@ class GenerateDailyOverview implements ShouldQueue
                 $subtotal = $item->amount * $item->menuItem->price;
                 $sheet->setCellValue('E' . $row, $subtotal);
                 $sheet->setCellValue('F' . $row, $firstItem ? $orderTotal : '');
+
                 $firstItem = false;
             }
+
             $grandTotal += $orderTotal;
         }
 
-        // Add total row
         $row++;
+
         $sheet->setCellValue('E' . $row, 'Total:');
         $sheet->setCellValue('F' . $row, $grandTotal);
 

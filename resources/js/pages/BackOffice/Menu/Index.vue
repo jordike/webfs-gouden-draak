@@ -86,6 +86,7 @@
 
     function createNewItem() {
         resetNewItem();
+
         showCreateModal.value = true;
     }
 
@@ -102,8 +103,16 @@
 <template>
     <BackOfficeLayout>
         <div class="min-h-screen bg-gray-50 p-6">
-            <div class="mb-8 flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-gray-800">{{ t('backoffice.menu.title') }}</h1>
+            <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-2xl font-bold text-gray-800">{{ t('backoffice.menu.title') }}</h1>
+                    <input
+                        v-model="filter"
+                        type="text"
+                        class="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-700 focus:border-green-500 focus:outline-none md:w-72"
+                        :placeholder="t('backoffice.menu.filter_placeholder')"
+                    />
+                </div>
 
                 <button
                     class="flex items-center gap-2 rounded bg-green-600 px-5 py-2 font-semibold text-white shadow transition hover:bg-green-700"

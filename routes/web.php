@@ -14,10 +14,9 @@ Route::inertia('/nieuws', 'Main/News')->name('news');
 Route::inertia('/contact', 'Main/Contact')->name('contact');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::middleware('guest')->group(function() {
-    Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
-    Route::get('/menu/download', [MenuController::class, 'download'])->name('menu.download');
-});
+Route::get('/menu/download', [MenuController::class, 'download'])->name('menu.download');
+
+Route::middleware('guest')->post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

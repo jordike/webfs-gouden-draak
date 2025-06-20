@@ -119,7 +119,8 @@
 
     <body>
         <div class="menu-bg">
-            <img class="logo" src="{{ public_path('assets/img/dragon-large.png') }}" alt="Logo">
+            <img class="logo" src="{{ public_path('assets/img/dragon-large.png') }}" alt="Logo" />
+
             <h1 class="menu-title">Menu</h1>
 
             @foreach ($categories as $category)
@@ -133,6 +134,7 @@
                                     <span class="item-id">#{{ $item->id }}</span>
                                     {!! $item->name !!}
                                 </span>
+
                                 <span class="item-price">&euro; {{ number_format($item->price, 2, ',', '.') }}</span>
                             </div>
 

@@ -32,7 +32,7 @@
             <h2 class="mb-6 text-xl font-bold text-gray-800">{{ t('backoffice.menu.new_item') }}</h2>
 
             <form method="post" action="/backoffice/menu">
-                <input type="hidden" name="token" :value="csrfToken" />
+                <input type="hidden" name="_token" :value="csrfToken" />
 
                 <div class="mb-4">
                     <label for="newitem-name" class="mb-1 block font-medium text-gray-700">{{ t('backoffice.menu.name') }} *</label>
