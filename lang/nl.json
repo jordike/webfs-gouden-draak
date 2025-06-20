@@ -1,0 +1,38 @@
+{
+    "restaurant_name": "De Gouden Draak",
+    "main": {
+        "header": {
+            "title": "Chinees Indische Specaliteiten",
+            "marquee": "Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!"
+        },
+        "navbar": {
+            "menu_card": "Menukaart",
+            "news": "Nieuws",
+            "contact": "Contact",
+            "go_to_contact": "Naar contact"
+        },
+        "contact": {
+            "instructions": "De Gouden Draak is eenvoudig te vinden, vlak bij het centrum, 5 minuten lopen achter het centraal station.",
+            "address": "Onderwijsboulevard 215, kamer OG112<br />5223 DE 's-Hertogenbosch"
+        },
+        "home": {
+            "intro": "Al jaren is De Gouden Draak een begrip als het gaat om de beste afhaalgerechten in 's-Hertogenbosch. <br />Graag trakteren we u op authentieke gerechten uit de Cantonese keuken.",
+            "student_offer_title": "Speciale Studentenaanbieding",
+            "student_offer_subtitle": "Chinese Rijsttafel (2 personen)",
+            "student_offer_instruction": "Maak een keuze uit 3 van onze onderstaande keuzegerechten:",
+            "dishes": {
+                "koe_loe_yuk": "Koe Loe Yuk",
+                "foe_yong_hai": "Foe Yong Hai",
+                "tjap_tjoy": "Tjap Tjoy",
+                "garnalen_knoflook": "Garnalen met Gebakken Knoflook",
+                "babi_pangang": "Babi Pangang",
+                "kipfilet_bonensaus": "Kipfilet in Zwarte Bonen saus"
+            },
+            "with_rice": "Met witte rijst. (Nasi of bami voor meerprijs mogelijk.)",
+            "price": "Prijs: €21,00"
+        },
+        "news": {
+            "message": "Door de Corona crisis is De Gouden Draak op het moment slechts beperkt open.<br />Het restaurant-gedeelte is gesloten. U kan uw favoriete gerechten nog wel afhalen."
+        }
+    }
+}

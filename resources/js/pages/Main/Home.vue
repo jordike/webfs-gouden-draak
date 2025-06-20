@@ -1,37 +1,59 @@
 <script setup lang="ts">
     import AppLayout from '@/layouts/AppLayout.vue';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
 </script>
 
 <template>
     <AppLayout>
         <section class="p- mx-[50px] border-1 border-black bg-white p-[5px] text-center font-bold text-black">
-            <p class="mb-[20px]">
-                Al jaren is De Gouden Draak een begrip als het gaat om de beste afhaalgerechten in 's-Hertogenbosch. <br />
-                Graag trakteren we u op authentieke gerechten uit de Cantonese keuken.
+            <p class="mb-[20px]" v-html="t('main.home.intro')"></p>
+            <h3 class="mb-3 text-[20px] underline">
+                {{ t('main.home.student_offer_title') }}
+            </h3>
+            <h4 class="text-[30px]">
+                {{ t('main.home.student_offer_subtitle') }}
+            </h4>
+            <p>
+                {{ t('main.home.student_offer_instruction') }}
             </p>
-            <h3 class="mb-3 text-[20px] underline">Speciale Studentenaanbieding</h3>
-            <h4 class="text-[30px]">Chinese Rijsttafel (2 personen)</h4>
-            <p>Maak een keuze uit 3 van onze onderstaande keuzegerechten:</p>
 
             <div class="my-6 flex flex-col items-center">
                 <div class="mb-2 flex flex-row justify-center gap-12">
-                    <span class="w-80 text-right">Koe Loe Yuk</span>
-                    <span class="w-80 text-left">Foe Yong Hai</span>
+                    <span class="w-80 text-right">
+                        {{ t('main.home.dishes.koe_loe_yuk') }}
+                    </span>
+                    <span class="w-80 text-left">
+                        {{ t('main.home.dishes.foe_yong_hai') }}
+                    </span>
                 </div>
 
                 <div class="mb-2 flex flex-row justify-center gap-12">
-                    <span class="w-80 text-right">Tjap Tjoy</span>
-                    <span class="w-80 text-left">Garnalen met Gebakken Knoflook</span>
+                    <span class="w-80 text-right">
+                        {{ t('main.home.dishes.tjap_tjoy') }}
+                    </span>
+                    <span class="w-80 text-left">
+                        {{ t('main.home.dishes.garnalen_knoflook') }}
+                    </span>
                 </div>
 
                 <div class="mb-2 flex flex-row justify-center gap-12">
-                    <span class="w-80 text-right">Babi Pangang</span>
-                    <span class="w-80 text-left">Kipfilet in Zwarte Bonen saus</span>
+                    <span class="w-80 text-right">
+                        {{ t('main.home.dishes.babi_pangang') }}
+                    </span>
+                    <span class="w-80 text-left">
+                        {{ t('main.home.dishes.kipfilet_bonensaus') }}
+                    </span>
                 </div>
             </div>
 
-            <p class="mb-3">Met witte rijst. (Nasi of bami voor meerprijs mogelijk.)</p>
-            <p class="text-[30px]">Prijs: &euro;21,00</p>
+            <p class="mb-3">
+                {{ t('main.home.with_rice') }}
+            </p>
+            <p class="text-[30px]">
+                {{ t('main.home.price') }}
+            </p>
         </section>
     </AppLayout>
 </template>
