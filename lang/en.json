@@ -113,7 +113,8 @@
             "part": "Part {number}",
             "max": "max: {amount}",
             "no_comments": "No comments",
-            "subtotal": "Subtotal"
+            "subtotal": "Subtotal",
+            "split_saved": "Bill has been split"
         },
         "pages": {
             "login": {

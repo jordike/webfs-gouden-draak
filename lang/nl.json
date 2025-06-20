@@ -109,11 +109,12 @@
             "split_bill": "Rekening splitsen",
             "cancel_split": "Annuleer splitsing",
             "number_of_parts": "Aantal delen (max 8):",
-            "save_split": "Opslaan splitsing",
+            "save_split": "Splitsing",
             "part": "Deel {number}",
             "max": "max: {amount}",
             "no_comments": "Geen opmerkingen",
-            "subtotal": "Subtotaal"
+            "subtotal": "Subtotaal",
+            "split_saved": "Rekening is gesplitst"
         },
         "pages": {
             "login": {

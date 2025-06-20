@@ -61,7 +61,7 @@
         await axios.post(`/backoffice/orders/${props.order.id}/assign-items`, { assignments });
 
         emit('splitSaved');
-        alert(t('backoffice.order_details.save_split') + '!');
+        alert(t('backoffice.order_details.split_saved'));
     }
 </script>
 
