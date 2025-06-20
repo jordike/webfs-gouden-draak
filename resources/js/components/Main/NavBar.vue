@@ -26,6 +26,27 @@
                     {{ t('main.navbar.contact') }}
                 </Link>
             </nav>
+
+            <div class="mt-4 flex justify-center gap-2">
+                <button
+                    :class="[
+                        'border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-[10px] font-medium transition-colors',
+                        $i18n.locale === 'nl' ? 'opacity-100' : 'text-white opacity-70 hover:opacity-100',
+                    ]"
+                    @click="$i18n.locale = 'nl'"
+                >
+                    NL
+                </button>
+                <button
+                    :class="[
+                        'border-1 border-white bg-[url(/assets/img/menu_bg_gradient.png)] px-[10px] font-medium transition-colors',
+                        $i18n.locale === 'en' ? 'opacity-100' : 'text-white opacity-70 hover:opacity-100',
+                    ]"
+                    @click="$i18n.locale = 'en'"
+                >
+                    EN
+                </button>
+            </div>
         </section>
 
         <img class="h-[200px]" src="/assets/img/dragon-small-flipped.png" alt="Golden Dragon Flipped" />
