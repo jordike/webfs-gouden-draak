@@ -34,5 +34,70 @@
         "news": {
             "message": "Door de Corona crisis is De Gouden Draak op het moment slechts beperkt open.<br />Het restaurant-gedeelte is gesloten. U kan uw favoriete gerechten nog wel afhalen."
         }
+    },
+    "backoffice": {
+        "header": {
+            "kassa": "Kassa",
+            "menu": "Menu",
+            "sales_overview": "Verkoop overzicht",
+            "reviews": "Reviews",
+            "daily_overview": "Dagoverzicht",
+            "tables": "Tafels",
+            "logout": "Uitloggen",
+            "title": "Gouden Draak BackOffice"
+        },
+        "menu": {
+            "new_item": "Nieuw menu-item",
+            "edit_item": "Menu-item bewerken",
+            "name": "Naam",
+            "description": "Beschrijving",
+            "price": "Prijs (€)",
+            "category": "Categorie",
+            "new_category": "Nieuwe categorie...",
+            "create": "Aanmaken",
+            "cancel": "Annuleren",
+            "save": "Opslaan",
+            "actions": "Acties",
+            "edit": "Bewerken",
+            "delete": "Verwijderen",
+            "items_in_category": "{count} gerechten",
+            "no_items": "Geen items in deze categorie."
+        },
+        "orders": {
+            "add": "Toevoegen",
+            "increase": "Verhoog aantal",
+            "decrease": "Verlaag aantal",
+            "remove": "Verwijder item",
+            "comment_placeholder": "Opmerking toevoegen...",
+            "order_id": "Bestel-ID",
+            "dish_name": "Gerechtnaam"
+        },
+        "sales": {
+            "order": "Order",
+            "date": "Datum",
+            "total": "Totaal",
+            "show_details": "Toon details",
+            "hide_details": "Verberg details",
+            "download_pdf": "Download pdf",
+            "total_incl_vat": "Totaal (incl. btw):",
+            "total_vat": "Totaal btw (21%):",
+            "total_excl_vat": "Totaal (excl. btw):",
+            "filters": {
+                "order_id_or_dish": "Bestel-ID of Gerechtnaam",
+                "start_date": "Startdatum",
+                "end_date": "Einddatum",
+                "clear_filters": "Filters wissen"
+            }
+        },
+        "order_details": {
+            "split_bill": "Rekening splitsen",
+            "cancel_split": "Annuleer splitsing",
+            "number_of_parts": "Aantal delen (max 8):",
+            "save_split": "Opslaan splitsing",
+            "part": "Deel {number}",
+            "max": "max: {amount}",
+            "no_comments": "Geen opmerkingen",
+            "subtotal": "Subtotaal"
+        }
     }
 }

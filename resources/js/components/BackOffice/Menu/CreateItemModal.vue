@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
+
     defineProps<{
         show: boolean;
         newItem: {
@@ -19,19 +23,19 @@
 <template>
     <div v-if="show" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40" @mousedown.self="$emit('close')">
         <div class="relative w-full max-w-lg rounded bg-white p-8 shadow-lg">
-            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" @click="$emit('close')" title="Sluiten">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" @click="$emit('close')" :title="t('backoffice.menu.cancel')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            <h2 class="mb-6 text-xl font-bold text-gray-800">Nieuw menu-item</h2>
+            <h2 class="mb-6 text-xl font-bold text-gray-800">{{ t('backoffice.menu.new_item') }}</h2>
 
             <form method="post" action="/backoffice/menu">
                 <input type="hidden" name="token" :value="csrfToken" />
 
                 <div class="mb-4">
-                    <label for="newitem-name" class="mb-1 block font-medium text-gray-700">Naam *</label>
+                    <label for="newitem-name" class="mb-1 block font-medium text-gray-700">{{ t('backoffice.menu.name') }} *</label>
                     <input
                         id="newitem-name"
                         v-model="newItem.name"
@@ -43,7 +47,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="newitem-description" class="mb-1 block font-medium text-gray-700">Beschrijving</label>
+                    <label for="newitem-description" class="mb-1 block font-medium text-gray-700">{{ t('backoffice.menu.description') }}</label>
                     <textarea
                         id="newitem-description"
                         name="description"
@@ -53,7 +57,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="newitem-price" class="mb-1 block font-medium text-gray-700">Prijs (€) *</label>
+                    <label for="newitem-price" class="mb-1 block font-medium text-gray-700">{{ t('backoffice.menu.price') }} *</label>
                     <input
                         id="newitem-price"
                         v-model="newItem.price"
@@ -67,7 +71,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="newitem-category" class="mb-1 block font-medium text-gray-700">Categorie *</label>
+                    <label for="newitem-category" class="mb-1 block font-medium text-gray-700">{{ t('backoffice.menu.category') }} *</label>
                     <select
                         id="newitem-category"
                         v-model="newItem.category"
@@ -76,7 +80,7 @@
                         @change="newItem.useNewCategory = newItem.category === '__new__'"
                         required
                     >
-                        <option value="__new__">Nieuwe categorie...</option>
+                        <option value="__new__">{{ t('backoffice.menu.new_category') }}</option>
                         <option disabled>──────────</option>
                         <option v-for="cat in categories" :key="cat.name" :value="cat.name">
                             {{ cat.name }}
@@ -89,7 +93,7 @@
                             v-model="newItem.newCategory"
                             name="newCategory"
                             type="text"
-                            placeholder="Nieuwe categorienaam"
+                            :placeholder="t('backoffice.menu.new_category')"
                             class="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-200 focus:outline-none"
                             required
                         />
@@ -98,9 +102,11 @@
 
                 <div class="mt-6 flex justify-end gap-2">
                     <button type="button" class="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300" @click="$emit('close')">
-                        Annuleren
+                        {{ t('backoffice.menu.cancel') }}
                     </button>
-                    <button type="submit" class="rounded bg-green-600 px-4 py-2 font-semibold text-white hover:bg-green-700">Aanmaken</button>
+                    <button type="submit" class="rounded bg-green-600 px-4 py-2 font-semibold text-white hover:bg-green-700">
+                        {{ t('backoffice.menu.create') }}
+                    </button>
                 </div>
             </form>
         </div>

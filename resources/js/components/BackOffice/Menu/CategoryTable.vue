@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n();
+
     defineProps<{
         category: {
             name: string;
@@ -19,17 +23,19 @@
     <div class="mb-10">
         <div class="mb-3 flex items-center">
             <h2 class="text-xl font-semibold text-gray-700">{{ category.name }}</h2>
-            <span class="ml-3 rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-600">{{ category.items.length }} gerechten</span>
+            <span class="ml-3 rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-600">
+                {{ t('backoffice.menu.items_in_category', { count: category.items.length }) }}
+            </span>
         </div>
 
         <div class="overflow-x-auto rounded bg-white shadow">
             <table class="min-w-full">
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Naam</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Beschrijving</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Prijs</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Acties</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">{{ t('backoffice.menu.name') }}</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">{{ t('backoffice.menu.description') }}</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">{{ t('backoffice.menu.price') }}</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">{{ t('backoffice.menu.actions') }}</th>
                     </tr>
                 </thead>
 
@@ -43,7 +49,7 @@
                                 <button
                                     class="flex w-full items-center justify-center rounded bg-blue-500 px-4 py-1 font-medium text-white shadow transition hover:bg-blue-600 sm:w-auto"
                                     @click="$emit('edit', item.id)"
-                                    title="Bewerken"
+                                    :title="t('backoffice.menu.edit')"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +65,7 @@
                                             d="M15.232 5.232l3.536 3.536M9 13l6-6m2 2l-6 6m-2 2h6"
                                         />
                                     </svg>
-                                    Bewerken
+                                    {{ t('backoffice.menu.edit') }}
                                 </button>
                                 <form :action="`/backoffice/menu/${item.id}`" method="POST">
                                     <input type="hidden" name="_token" :value="csrfToken" />
@@ -68,7 +74,7 @@
                                     <button
                                         type="submit"
                                         class="flex w-full items-center justify-center rounded bg-red-500 px-4 py-1 font-medium text-white shadow transition hover:bg-red-600 sm:w-auto"
-                                        title="Verwijderen"
+                                        :title="t('backoffice.menu.delete')"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +85,7 @@
                                         >
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
-                                        Verwijderen
+                                        {{ t('backoffice.menu.delete') }}
                                     </button>
                                 </form>
                             </div>
@@ -87,7 +93,9 @@
                     </tr>
 
                     <tr v-if="category.items.length === 0">
-                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">Geen items in deze categorie.</td>
+                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                            {{ t('backoffice.menu.no_items') }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

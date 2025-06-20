@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+    import { useI18n } from 'vue-i18n';
     import OrderDetails from './OrderDetails.vue';
+
+    const { t } = useI18n();
 
     defineProps<{
         filteredOrders: any[];
@@ -18,9 +21,9 @@
         <table class="w-full table-auto border-collapse">
             <thead>
                 <tr class="bg-blue-100 text-left text-blue-900">
-                    <th class="border-b px-5 py-4 font-semibold">Order</th>
-                    <th class="border-b px-5 py-4 font-semibold">Datum</th>
-                    <th class="border-b px-5 py-4 font-semibold">Totaal</th>
+                    <th class="border-b px-5 py-4 font-semibold">{{ t('backoffice.sales.order') }}</th>
+                    <th class="border-b px-5 py-4 font-semibold">{{ t('backoffice.sales.date') }}</th>
+                    <th class="border-b px-5 py-4 font-semibold">{{ t('backoffice.sales.total') }}</th>
                     <th class="border-b px-5 py-4 font-semibold" colspan="2"></th>
                 </tr>
             </thead>
@@ -36,12 +39,12 @@
                         </td>
                         <td class="border-b px-5 py-3">
                             <button @click.stop="toggleCollapse(order.id)" class="text-blue-600 hover:underline focus:outline-none">
-                                {{ collapsedOrders[order.id] ? 'Toon' : 'Verberg' }} details
+                                {{ collapsedOrders[order.id] ? t('backoffice.sales.show_details') : t('backoffice.sales.hide_details') }}
                             </button>
                         </td>
                         <td>
                             <a :href="`/backoffice/sales/export/${order.id}`" class="text-blue-600 hover:underline focus:outline-none">
-                                Download pdf
+                                {{ t('backoffice.sales.download_pdf') }}
                             </a>
                         </td>
                     </tr>

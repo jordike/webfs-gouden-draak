@@ -1,6 +1,9 @@
 <script lang="ts" setup>
     import { defineEmits, defineProps, ref, watch } from 'vue';
 
+    import { useI18n } from 'vue-i18n';
+    const { t } = useI18n();
+
     const props = defineProps<{
         orderItem: any;
         idx: number;
@@ -38,7 +41,7 @@
                 v-model="comment"
                 class="mt-2 w-full rounded border border-gray-200 px-2 py-1 text-sm text-gray-700 focus:ring-2 focus:ring-green-200 focus:outline-none"
                 :name="`items[${idx}][comment]`"
-                placeholder="Opmerking toevoegen..."
+                :placeholder="t('backoffice.orders.comment_placeholder')"
                 rows="2"
             ></textarea>
         </div>
@@ -47,7 +50,7 @@
             <button
                 class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-lg text-gray-600 transition hover:bg-gray-300"
                 @click.prevent="$emit('decrease', idx)"
-                title="Verlaag aantal"
+                :title="t('backoffice.orders.decrease')"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
@@ -61,7 +64,7 @@
             <button
                 class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-lg text-gray-600 transition hover:bg-gray-300"
                 @click.prevent="$emit('increase', idx)"
-                title="Verhoog aantal"
+                :title="t('backoffice.orders.increase')"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -71,7 +74,7 @@
             <button
                 class="ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-red-100 text-red-500 transition hover:bg-red-200"
                 @click.prevent="$emit('remove', idx)"
-                title="Verwijder item"
+                :title="t('backoffice.orders.remove')"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
