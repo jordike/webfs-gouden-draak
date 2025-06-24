@@ -1,15 +1,43 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
+Route::inertia('/', 'Main/Home')->name('home');
+Route::inertia('/menukaart', 'Main/Menu')->name('menu');
+Route::inertia('/nieuws', 'Main/News')->name('news');
+Route::inertia('/contact', 'Main/Contact')->name('contact');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/menu/download', [MenuController::class, 'download'])->name('menu.download');
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+Route::middleware('guest')->post('/login', [AuthController::class, 'loginPost'])->name('login.post');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::prefix('backoffice')->name('backoffice.')->group(function () {
+        Route::get('/', function() {
+            return redirect()->route('backoffice.orders.index');
+        });
+
+        Route::resource('orders', OrderController::class)->names('orders');
+        Route::resource('menu', MenuController::class)->names('menu');
+        Route::resource('tables', TableController::class)->names('tables');
+        Route::get('sales', [SalesController::class, 'index'])->name('sales.index');
+        Route::get('sales/daily-overview', [SalesController::class, 'dailyOverview'])->name('sales.daily-overview');
+        Route::get('sales/daily-overview/{dailyOverview}/download', [SalesController::class, 'downloadDailyOverview'])->name('sales.daily-overview.download');
+        Route::get('sales/export/{order}', [SalesController::class, 'export'])->name('sales.export');
+        Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+        Route::post('orders/{order}/parts', [OrderController::class, 'createParts'])->name('orders.parts.create');
+        Route::post('orders/{order}/assign-items', [OrderController::class, 'assignItemsToParts'])->name('orders.parts.assign');
+    });
+
+    Route::get('/review/{order}', [ReviewController::class, 'create'])->name('review.create');
+    Route::post('/review/{order}', [ReviewController::class, 'store'])->name('review.store');
+});

@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\DailyOverview;
+use App\Models\Order;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Spatie\LaravelPdf\Facades\Pdf;
+
+class SalesController extends Controller
+{
+    public function index()
+    {
+        $orders = Order::with('items.menuItem')
+            ->orderBy('date_placed', 'desc')
+            ->get();
+
+        return inertia('BackOffice/Sales/Index', [
+            'orders' => $orders
+        ]);
+    }
+
+    public function export(Order $order)
+    {
+        $order->load(['items', 'items.menuItem', 'parts', 'parts.items', 'parts.items.menuItem']);
+
+        $pdf = Pdf::view('pdf', ['order' => $order])
+            ->paperSize(8.5, 10, 'cm');
+
+        $writer = new PngWriter();
+        $qrCode = new QrCode(route('review.create', $order->id));
+        $result = $writer->write($qrCode);
+        $qrCodeDataUrl = $result->getDataUri();
+
+        $pdf->view('pdf/bill', [
+            'order' => $order,
+            'qrCode' => $qrCodeDataUrl
+        ]);
+
+        return $pdf->download('order-' . $order->id . '.pdf');
+    }
+
+    public function dailyOverview()
+    {
+        $dailyOverviews = DailyOverview::orderBy('date', 'desc')->get();
+
+        return inertia('BackOffice/Sales/DailyOverview', [
+            'dailyOverviews' => $dailyOverviews
+        ]);
+    }
+
+    public function downloadDailyOverview(DailyOverview $dailyOverview)
+    {
+        return response()
+            ->download($dailyOverview->getFilePath(), 'daily-overview-' . $dailyOverview->date->format('Ymd') . '.xlsx');
+    }
+}
