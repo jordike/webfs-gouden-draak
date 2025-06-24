@@ -120,12 +120,7 @@
                         </label>
                         <div class="flex justify-center gap-4">
                             <label
-                                v-for="(option, idx) in [
-                                    t('backoffice.reviews.labels.bad'),
-                                    t('backoffice.reviews.labels.average'),
-                                    t('backoffice.reviews.labels.good'),
-                                    t('backoffice.reviews.labels.excellent'),
-                                ]"
+                                v-for="(option, idx) in [t('slecht'), t('matig'), t('goed'), t('uitstekend')]"
                                 :key="option"
                                 class="flex cursor-pointer items-center gap-2 rounded-full px-3 py-1 transition-all duration-150"
                                 :class="{
