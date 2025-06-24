@@ -23,7 +23,7 @@ class SalesController extends Controller
 
     public function export(Order $order)
     {
-        set_time_limit(120);
+        $order->load(['items', 'items.menuItem', 'parts', 'parts.items', 'parts.items.menuItem']);
 
         $pdf = Pdf::view('pdf', ['order' => $order])
             ->paperSize(8.5, 10, 'cm');

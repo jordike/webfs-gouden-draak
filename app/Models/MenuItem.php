@@ -19,4 +19,9 @@ class MenuItem extends Model
     {
         return $this->belongsTo(MenuCategory::class, 'category_name', 'name');
     }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

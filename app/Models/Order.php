@@ -21,6 +21,6 @@ class Order extends Model
 
     public function parts()
     {
-        return $this->hasMany(OrderPart::class);
+        return $this->hasMany(OrderPart::class, 'order_id', 'id');
     }
 }
